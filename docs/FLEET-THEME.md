@@ -306,6 +306,92 @@ For teams migrating from generic themes:
 3. Implement high-contrast mode toggle for field users
 4. Update documentation with fleet terminology
 
+## Industrial Component Patterns Reference
+
+### Available Pattern Components
+
+The fleet theme system includes pre-built industrial UI patterns:
+
+1. **StatusBadge** - Equipment and system status indicators
+2. **EquipmentState** - Machine operational state visualization
+3. **AlertPriorityIndicator** - Categorized alert counters
+4. **TelemetryValue** - Real-time sensor data display
+5. **ConnectionQuality** - Network quality indicators
+6. **DataAgeIndicator** - Data freshness visualization
+
+Import from:
+```tsx
+import {
+  StatusBadge,
+  EquipmentState,
+  AlertPriorityIndicator,
+  TelemetryValue,
+  ConnectionQuality,
+  DataAgeIndicator
+} from '@/components/patterns/industrial-patterns'
+```
+
+### Pattern Showcase
+
+View all patterns in action:
+```tsx
+import { PatternShowcase } from '@/components/patterns/pattern-showcase'
+
+// In your page or component
+<PatternShowcase />
+```
+
+## Animation Patterns
+
+### Critical State Pulse
+
+```css
+@keyframes pulse-critical {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0.5; 
+    transform: scale(1.05); 
+  }
+}
+```
+
+### Status Transitions
+
+```css
+.status-transition {
+  transition: all 0.3s ease-in-out;
+}
+```
+
+## Fleet Variant Classes
+
+Pre-configured variant classes using CVA:
+
+```tsx
+import { 
+  statusBadgeVariants,
+  telemetryCardVariants,
+  gaugeVariants,
+  alertVariants,
+  connectionIndicatorVariants,
+  metricTrendVariants
+} from '@/components/ui/fleet-variants'
+```
+
+## Testing Patterns
+
+### Visual Testing
+- Test all status colors in light/dark/high-contrast modes
+- Verify animations don't cause motion sickness
+- Check touch targets are minimum 44x44px
+
+### Field Testing
+- Validate in bright sunlight conditions
+- Test with work gloves
+- Verify critical alerts are noticeable from distance
+
 ## Future Enhancements
 
 Planned additions to the fleet theme system:
@@ -315,8 +401,10 @@ Planned additions to the fleet theme system:
 - [ ] Animated status transitions
 - [ ] Dark mode telemetry optimizations
 - [ ] Color-blind mode variants
+- [ ] Haptic feedback patterns for mobile
+- [ ] AR/VR optimized themes
 
 ---
 
 *Last Updated: 2025-07-05*
-*Version: 1.0.0*
+*Version: 1.1.0*

@@ -90,6 +90,9 @@ export default function FleetOpsShowcase() {
             </div>
           </div>
           <div className="ml-auto flex items-center gap-4">
+            <Button variant="outline" size="sm" asChild>
+              <a href="/showcase">Industrial Patterns</a>
+            </Button>
             <ThemeToggle />
             <div className="flex items-center gap-2">
               <Truck className="h-5 w-5 text-gray-600" />
