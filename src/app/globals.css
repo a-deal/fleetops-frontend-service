@@ -118,5 +118,55 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* ========================================================================== */
+  /* Tremor CSS Variable Mapping - Maps to shadcn/ui variables                 */
+  /* This enables Tremor components to use our unified theme                    */
+  /* ========================================================================== */
+  :root {
+    /* Text and Icon Colors → Foreground */
+    --tremor-content-emphasis: oklch(from var(--foreground) l c h);
+    --tremor-content-strong: oklch(from var(--foreground) l c h / 0.9);
+    --tremor-content-DEFAULT: oklch(from var(--foreground) l c h / 0.75);
+    --tremor-content-subtle: oklch(from var(--foreground) l c h / 0.5);
+    
+    /* Surface and Background Colors → Background & Card */
+    --tremor-background-muted: oklch(from var(--muted) l c h);
+    --tremor-background-subtle: oklch(from var(--accent) l c h);
+    --tremor-background-DEFAULT: oklch(from var(--background) l c h);
+    --tremor-background-emphasis: oklch(from var(--card) l c h);
+
+    /* Border Colors → Border */
+    --tremor-border-DEFAULT: oklch(from var(--border) l c h);
+    --tremor-border-strong: oklch(from var(--foreground) l c h / 0.2);
+
+    /* Ring (Focus) Colors → Ring */
+    --tremor-ring-DEFAULT: oklch(from var(--ring) l c h);
+
+    /* Brand Colors → Primary */
+    --tremor-brand-faint: oklch(from var(--primary) l c h / 0.1);
+    --tremor-brand-muted: oklch(from var(--primary) l c h / 0.2);
+    --tremor-brand-subtle: oklch(from var(--primary) l c h / 0.3);
+    --tremor-brand-DEFAULT: oklch(from var(--primary) l c h);
+    --tremor-brand-emphasis: oklch(from var(--primary-foreground) l c h);
+    --tremor-brand-inverted: oklch(from var(--background) l c h);
+
+    /* Radius → Use existing radius vars */
+    --tremor-border-radius-small: calc(var(--radius) - 0.2rem);
+    --tremor-border-radius-DEFAULT: var(--radius);
+    --tremor-border-radius-large: calc(var(--radius) + 0.2rem);
+    
+    /* Shadows - Tremor specific */
+    --tremor-shadow-card: 0 1px 3px 0 oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
+    --tremor-shadow-dropdown: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  }
+
+  /* Apply Tremor overrides to ensure consistency */
+  [data-tremor-root] {
+    --tremor-brand: var(--primary);
+    --tremor-background-default: var(--background);
+    --tremor-text-default: var(--foreground);
   }
 }

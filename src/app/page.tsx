@@ -15,6 +15,7 @@ import {
   Users,
 } from "lucide-react";
 import { useState } from "react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -86,9 +87,12 @@ export default function UIShowcase() {
               <p className="text-xs text-gray-600">Next.js 15 + TypeScript + Tailwind CSS v4</p>
             </div>
           </div>
-          <div className="ml-auto flex items-center gap-2">
-            <Dumbbell className="h-5 w-5 text-gray-600" />
-            <span className="text-sm font-medium">Day 1 Complete</span>
+          <div className="ml-auto flex items-center gap-4">
+            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              <Dumbbell className="h-5 w-5 text-gray-600" />
+              <span className="text-sm font-medium">Day 1 Complete</span>
+            </div>
           </div>
         </div>
       </header>
