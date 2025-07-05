@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+
+# Production
+.next/
+out/
+build/
+dist/
+
+# Debug
+*.log
+
+# Environment
+.env*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Generated files
+*.tsbuildinfo
+next-env.d.ts

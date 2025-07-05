@@ -1,0 +1,20 @@
+{
+  "editor.vim.enabled": true,
+  "editor.vim.useSystemClipboard": true,
+  "editor.vim.hlsearch": true,
+  "editor.vim.incsearch": true,
+  "editor.vim.ignorecase": true,
+  "editor.vim.smartcase": true,
+  "editor.vim.easymotion": true,
+  "editor.vim.incsearch": true,
+  "editor.vim.handleKeys": {
+    "<C-d>": true,
+    "<C-u>": true,
+    "<C-f>": true,
+    "<C-b>": true
+  },
+  "editor.vim.timeout": 1000,
+  "editor.vim.timeoutlen": 1000,
+  "editor.cursorSurroundingLines": 3,
+  "editor.cursorBlinking": "solid"
+} 
