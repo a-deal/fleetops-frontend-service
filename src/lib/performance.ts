@@ -14,6 +14,7 @@ export function measureThemeSwitch(callback: () => void) {
     
     const measure = performance.getEntriesByName('theme-switch')[0]
     if (measure) {
+      // eslint-disable-next-line no-console
       console.log(`Theme switch took ${measure.duration.toFixed(2)}ms`)
     }
     

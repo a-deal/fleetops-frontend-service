@@ -57,6 +57,30 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   
+  /* Fleet Status Colors */
+  --color-fleet-status-operational: var(--fleet-status-operational);
+  --color-fleet-status-warning: var(--fleet-status-warning);
+  --color-fleet-status-critical: var(--fleet-status-critical);
+  --color-fleet-status-offline: var(--fleet-status-offline);
+  
+  /* Fleet Equipment States */
+  --color-fleet-equipment-active: var(--fleet-equipment-active);
+  --color-fleet-equipment-idle: var(--fleet-equipment-idle);
+  --color-fleet-equipment-maintenance: var(--fleet-equipment-maintenance);
+  --color-fleet-equipment-fault: var(--fleet-equipment-fault);
+  
+  /* Fleet Alert Severity */
+  --color-fleet-alert-info: var(--fleet-alert-info);
+  --color-fleet-alert-warning: var(--fleet-alert-warning);
+  --color-fleet-alert-error: var(--fleet-alert-error);
+  --color-fleet-alert-critical: var(--fleet-alert-critical);
+  
+  /* Fleet Telemetry Colors */
+  --color-fleet-telemetry-pressure: var(--fleet-telemetry-pressure);
+  --color-fleet-telemetry-temperature: var(--fleet-telemetry-temperature);
+  --color-fleet-telemetry-flow: var(--fleet-telemetry-flow);
+  --color-fleet-telemetry-vibration: var(--fleet-telemetry-vibration);
+  
   /* Border Radius from tokens */
   --radius-sm: 0.125rem;
   --radius-DEFAULT: 0.25rem;
@@ -129,6 +153,30 @@
   --sidebar-accent-foreground: oklch(20.37% 0.024 253.13);
   --sidebar-border: oklch(93.60% 0.009 253.13);
   --sidebar-ring: oklch(63.31% 0.177 264.38);
+  
+  /* Fleet Status Colors - Light Mode */
+  --fleet-status-operational: 142.1 70.6% 45.3%; /* Green */
+  --fleet-status-warning: 45.4 92.9% 47.4%; /* Amber */
+  --fleet-status-critical: 0 72.2% 50.6%; /* Red */
+  --fleet-status-offline: 0 0% 63.9%; /* Gray */
+  
+  /* Fleet Equipment States - Light Mode */
+  --fleet-equipment-active: 142.1 70.6% 45.3%; /* Green */
+  --fleet-equipment-idle: 201.3 96.3% 32.2%; /* Blue */
+  --fleet-equipment-maintenance: 45.4 92.9% 47.4%; /* Amber */
+  --fleet-equipment-fault: 0 72.2% 50.6%; /* Red */
+  
+  /* Fleet Alert Severity - Light Mode */
+  --fleet-alert-info: 201.3 96.3% 32.2%; /* Blue */
+  --fleet-alert-warning: 45.4 92.9% 47.4%; /* Amber */
+  --fleet-alert-error: 24.6 94.7% 53.1%; /* Orange */
+  --fleet-alert-critical: 0 72.2% 50.6%; /* Red */
+  
+  /* Fleet Telemetry Colors - Light Mode */
+  --fleet-telemetry-pressure: 201.3 96.3% 32.2%; /* Blue */
+  --fleet-telemetry-temperature: 0 72.2% 50.6%; /* Red */
+  --fleet-telemetry-flow: 142.1 70.6% 45.3%; /* Green */
+  --fleet-telemetry-vibration: 280.1 87.0% 50.3%; /* Purple */
 }
 
 .dark {
@@ -191,6 +239,30 @@
   --sidebar-accent-foreground: oklch(98.74% 0.008 253.13);
   --sidebar-border: oklch(31.42% 0.042 264.70);
   --sidebar-ring: oklch(63.31% 0.177 264.38);
+  
+  /* Fleet Status Colors - Dark Mode */
+  --fleet-status-operational: 142.1 70.6% 55.3%; /* Brighter green for dark mode */
+  --fleet-status-warning: 45.4 92.9% 57.4%; /* Brighter amber for dark mode */
+  --fleet-status-critical: 0 72.2% 60.6%; /* Brighter red for dark mode */
+  --fleet-status-offline: 0 0% 73.9%; /* Brighter gray for dark mode */
+  
+  /* Fleet Equipment States - Dark Mode */
+  --fleet-equipment-active: 142.1 70.6% 55.3%; /* Brighter green */
+  --fleet-equipment-idle: 201.3 96.3% 42.2%; /* Brighter blue */
+  --fleet-equipment-maintenance: 45.4 92.9% 57.4%; /* Brighter amber */
+  --fleet-equipment-fault: 0 72.2% 60.6%; /* Brighter red */
+  
+  /* Fleet Alert Severity - Dark Mode */
+  --fleet-alert-info: 201.3 96.3% 42.2%; /* Brighter blue */
+  --fleet-alert-warning: 45.4 92.9% 57.4%; /* Brighter amber */
+  --fleet-alert-error: 24.6 94.7% 63.1%; /* Brighter orange */
+  --fleet-alert-critical: 0 72.2% 60.6%; /* Brighter red */
+  
+  /* Fleet Telemetry Colors - Dark Mode */
+  --fleet-telemetry-pressure: 201.3 96.3% 42.2%; /* Brighter blue */
+  --fleet-telemetry-temperature: 0 72.2% 60.6%; /* Brighter red */
+  --fleet-telemetry-flow: 142.1 70.6% 55.3%; /* Brighter green */
+  --fleet-telemetry-vibration: 280.1 87.0% 60.3%; /* Brighter purple */
 }
 
 @layer base {
@@ -250,4 +322,31 @@
     --tremor-background-default: var(--background);
     --tremor-text-default: var(--foreground);
   }
+}
+
+/* High-Contrast Mode for Field Conditions */
+.high-contrast {
+  /* Enhanced contrast for outdoor/industrial use */
+  --background: oklch(0% 0 0);
+  --foreground: oklch(100% 0 0);
+  --muted: oklch(20% 0 0);
+  --muted-foreground: oklch(80% 0 0);
+  
+  /* High contrast status colors */
+  --fleet-status-operational: 120 100% 50%; /* Pure green */
+  --fleet-status-warning: 60 100% 50%; /* Pure yellow */
+  --fleet-status-critical: 0 100% 50%; /* Pure red */
+  --fleet-status-offline: 0 0% 80%; /* High contrast gray */
+  
+  /* High contrast equipment states */
+  --fleet-equipment-active: 120 100% 50%;
+  --fleet-equipment-idle: 240 100% 50%;
+  --fleet-equipment-maintenance: 60 100% 50%;
+  --fleet-equipment-fault: 0 100% 50%;
+  
+  /* Enhanced borders and inputs for visibility */
+  --border: oklch(50% 0 0);
+  --input: oklch(15% 0 0);
+  --card: oklch(5% 0 0);
+  --card-foreground: oklch(100% 0 0);
 }

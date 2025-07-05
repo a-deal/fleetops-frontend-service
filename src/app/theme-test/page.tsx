@@ -1,11 +1,12 @@
 "use client"
 
-import { Card as TremorCard, BarChart, Metric, Text } from "@tremor/react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { BarChart, Card as TremorCard, Metric, Text } from "@tremor/react"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
+
+import { ThemeToggle } from "@/components/theme-toggle"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { measureThemeSwitch } from "@/lib/performance"
 
 // Sample data for Tremor chart

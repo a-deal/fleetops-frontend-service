@@ -1,13 +1,14 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Providers } from "@/providers";
+
 import { cn } from "@/lib/utils";
+import { Providers } from "@/providers";
 import { gtAmerica, gtPressura, gtPressuraMono } from "@/styles/fonts";
 
 export const metadata: Metadata = {
-  title: "Gym Analytics Platform",
-  description: "Modern analytics platform for gym management",
+  title: "FleetOps Management Platform",
+  description: "Industrial fleet management platform with real-time telemetry and predictive maintenance",
 };
 
 export default function RootLayout({

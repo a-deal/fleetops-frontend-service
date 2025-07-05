@@ -1,22 +1,24 @@
 "use client";
 
-import { BarChart, Card as TremorCard, DonutChart, Grid,Metric } from "@tremor/react";
-import { AnimatePresence,motion } from "framer-motion";
+import { BarChart, Card as TremorCard, DonutChart, Grid, Metric } from "@tremor/react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
+  AlertTriangle,
   ArrowUpRight,
   BarChart3,
   Component,
-  Dumbbell,
+  Cpu,
+  Gauge,
   LineChart,
   Sparkles,
-  Target,
   TrendingUp,
-  Users,
+  Truck,
+  Zap,
 } from "lucide-react";
 import { useState } from "react";
-import { ThemeToggle } from "@/components/theme-toggle";
 
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -73,7 +75,7 @@ const FramerMotionLogo = () => (
 );
 
 // Main Page Component
-export default function UIShowcase() {
+export default function FleetOpsShowcase() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <header className="sticky top-0 z-50 w-full border-b bg-white/75 backdrop-blur-md">
@@ -83,15 +85,15 @@ export default function UIShowcase() {
               <NextLogo />
             </div>
             <div>
-              <h1 className="text-xl font-bold">Gym Analytics UI Showcase</h1>
+              <h1 className="text-xl font-bold">FleetOps Platform Showcase</h1>
               <p className="text-xs text-gray-600">Next.js 15 + TypeScript + Tailwind CSS v4</p>
             </div>
           </div>
           <div className="ml-auto flex items-center gap-4">
             <ThemeToggle />
             <div className="flex items-center gap-2">
-              <Dumbbell className="h-5 w-5 text-gray-600" />
-              <span className="text-sm font-medium">Day 1 Complete</span>
+              <Truck className="h-5 w-5 text-gray-600" />
+              <span className="text-sm font-medium">Fleet-Aware Foundations</span>
             </div>
           </div>
         </div>
@@ -106,10 +108,10 @@ export default function UIShowcase() {
             className="text-center"
           >
             <h2 className="mb-4 text-4xl font-bold tracking-tight">
-              Enterprise Gym Analytics Platform
+              Industrial Fleet Management Platform
             </h2>
             <p className="text-lg text-gray-600">
-              Showcasing our integrated UI component libraries for building beautiful, functional dashboards
+              Real-time monitoring, predictive maintenance, and fleet optimization for industrial IoT equipment
             </p>
           </motion.section>
 
@@ -122,8 +124,8 @@ export default function UIShowcase() {
 
       <footer className="mt-24 border-t py-8">
         <div className="container mx-auto px-6 text-center text-sm text-gray-600">
-          <p>Built with Next.js, TypeScript, and modern UI libraries</p>
-          <p className="mt-1">Performance: Cold start &lt;2s | HMR &lt;300ms | Build ~8s</p>
+          <p>Built with Next.js, TypeScript, and industrial-grade UI components</p>
+          <p className="mt-1">Real-time telemetry • Offline-first PWA • WebSocket architecture</p>
         </div>
       </footer>
     </div>
@@ -173,97 +175,100 @@ function ShadcnShowcase() {
       <ShowcaseHeader
         logo={<ShadcnLogo />}
         title="shadcn/ui"
-        description="Beautifully designed components built with Radix UI and Tailwind CSS"
+        description="Industrial-grade UI components built with Radix UI and Tailwind CSS"
         docsUrl="https://ui.shadcn.com"
       />
       
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {/* Interactive Card */}
+        {/* Equipment Status Card */}
         <Card className="transition-shadow hover:shadow-lg">
           <CardHeader>
-            <CardTitle>Member Analytics</CardTitle>
-            <CardDescription>Track member engagement and retention</CardDescription>
+            <CardTitle>Equipment Monitoring</CardTitle>
+            <CardDescription>Real-time equipment status and performance metrics</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-2xl font-bold">1,234</p>
-                <p className="text-xs text-gray-600">Active members</p>
+                <p className="text-2xl font-bold">47</p>
+                <p className="text-xs text-gray-600">Active machines</p>
               </div>
-              <Users className="h-8 w-8 text-gray-400" />
+              <div className="flex items-center gap-1">
+                <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                <span className="text-sm font-medium text-green-600">Operational</span>
+              </div>
             </div>
           </CardContent>
           <CardFooter className="flex gap-2">
-            <Button size="sm" variant="outline">View Details</Button>
-            <Button size="sm">Export</Button>
+            <Button size="sm" variant="outline">View Fleet</Button>
+            <Button size="sm">Generate Report</Button>
           </CardFooter>
         </Card>
 
-        {/* Dialog Example */}
+        {/* Alert Management Dialog */}
         <Card className="flex flex-col justify-center p-6">
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <Button className="w-full">
-                <Target className="mr-2 h-4 w-4" />
-                Set Fitness Goal
+                <AlertTriangle className="mr-2 h-4 w-4" />
+                Configure Alert
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Set Your Fitness Goal</DialogTitle>
+                <DialogTitle>Set Equipment Alert</DialogTitle>
                 <DialogDescription>
-                  Define your target metrics for the next quarter
+                  Configure threshold alerts for equipment monitoring
                 </DialogDescription>
               </DialogHeader>
               <div className="grid gap-4 py-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="target">Monthly Target</Label>
-                  <Input id="target" placeholder="e.g., 50 new members" />
+                  <Label htmlFor="threshold">Pressure Threshold (PSI)</Label>
+                  <Input id="threshold" placeholder="e.g., 150" />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="revenue">Revenue Goal</Label>
-                  <Input id="revenue" placeholder="e.g., $10,000" />
+                  <Label htmlFor="contact">Alert Contact</Label>
+                  <Input id="contact" placeholder="e.g., maintenance@company.com" />
                 </div>
               </div>
               <div className="flex justify-end gap-2">
                 <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-                <Button onClick={() => setOpen(false)}>Save Goal</Button>
+                <Button onClick={() => setOpen(false)}>Save Alert</Button>
               </div>
             </DialogContent>
           </Dialog>
           <p className="mt-3 text-center text-sm text-gray-600">
-            Click to open modal dialog
+            Configure real-time alerts
           </p>
         </Card>
 
-        {/* Tabs Example */}
+        {/* Dashboard Views Tabs */}
         <Card>
           <CardHeader>
-            <CardTitle>Analytics Views</CardTitle>
+            <CardTitle>Fleet Dashboard</CardTitle>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="overview" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="analytics">Analytics</TabsTrigger>
-                <TabsTrigger value="reports">Reports</TabsTrigger>
+                <TabsTrigger value="telemetry">Telemetry</TabsTrigger>
+                <TabsTrigger value="maintenance">Maintenance</TabsTrigger>
               </TabsList>
               <TabsContent value="overview" className="mt-4">
                 <div className="space-y-2">
-                  <p className="text-sm font-medium">Quick Stats</p>
-                  <p className="text-xs text-gray-600">View your gym&apos;s performance at a glance</p>
+                  <p className="text-sm font-medium">Fleet Status</p>
+                  <p className="text-xs text-gray-600">Real-time overview of all equipment</p>
                 </div>
               </TabsContent>
-              <TabsContent value="analytics" className="mt-4">
+              <TabsContent value="telemetry" className="mt-4">
                 <div className="space-y-2">
-                  <p className="text-sm font-medium">Deep Dive</p>
-                  <p className="text-xs text-gray-600">Detailed analytics and insights</p>
+                  <p className="text-sm font-medium">Live Sensors</p>
+                  <p className="text-xs text-gray-600">Pressure, temperature, flow rates</p>
                 </div>
               </TabsContent>
-              <TabsContent value="reports" className="mt-4">
+              <TabsContent value="maintenance" className="mt-4">
                 <div className="space-y-2">
-                  <p className="text-sm font-medium">Export Ready</p>
-                  <p className="text-xs text-gray-600">Generate custom reports</p>
+                  <p className="text-sm font-medium">Predictive Alerts</p>
+                  <p className="text-xs text-gray-600">Scheduled and emergency maintenance</p>
                 </div>
               </TabsContent>
             </Tabs>
@@ -274,22 +279,22 @@ function ShadcnShowcase() {
   );
 }
 
-// Tremor Showcase
-const chartdata = [
-  { month: "Jan", "Check-ins": 2488, "New Members": 145 },
-  { month: "Feb", "Check-ins": 3245, "New Members": 189 },
-  { month: "Mar", "Check-ins": 4123, "New Members": 243 },
-  { month: "Apr", "Check-ins": 3987, "New Members": 198 },
-  { month: "May", "Check-ins": 4523, "New Members": 251 },
-  { month: "Jun", "Check-ins": 5234, "New Members": 298 },
+// Tremor Showcase - Fleet Data
+const telemetryData = [
+  { month: "Jan", "Uptime": 98.5, "Efficiency": 87.2 },
+  { month: "Feb", "Uptime": 97.8, "Efficiency": 89.1 },
+  { month: "Mar", "Uptime": 99.2, "Efficiency": 91.5 },
+  { month: "Apr", "Uptime": 98.9, "Efficiency": 88.7 },
+  { month: "May", "Uptime": 99.1, "Efficiency": 92.3 },
+  { month: "Jun", "Uptime": 99.6, "Efficiency": 94.1 },
 ];
 
-const donutdata = [
-  { name: "Weights Area", value: 35 },
-  { name: "Cardio Zone", value: 25 },
-  { name: "Group Classes", value: 20 },
-  { name: "Swimming Pool", value: 12 },
-  { name: "Other", value: 8 },
+const equipmentTypeData = [
+  { name: "Hydraulic Pumps", value: 35 },
+  { name: "Compressors", value: 25 },
+  { name: "Generators", value: 20 },
+  { name: "Motors", value: 15 },
+  { name: "Other", value: 5 },
 ];
 
 function TremorShowcase() {
@@ -298,49 +303,49 @@ function TremorShowcase() {
       <ShowcaseHeader
         logo={<TremorLogo />}
         title="Tremor"
-        description="React components to build charts and dashboards"
+        description="Industrial analytics charts and real-time telemetry dashboards"
         docsUrl="https://tremor.so"
       />
       
       <Grid numItemsMd={2} numItemsLg={3} className="gap-6">
-        {/* Metric Card */}
+        {/* Fleet Performance Metric */}
         <TremorCard>
-          <h4 className="text-tremor-default text-tremor-content">Revenue</h4>
+          <h4 className="text-tremor-default text-tremor-content">Fleet Efficiency</h4>
           <div className="flex items-baseline justify-between">
-            <Metric>$54,329</Metric>
+            <Metric>94.1%</Metric>
             <span className="flex items-center text-sm font-medium text-green-600">
               <TrendingUp className="mr-1 h-4 w-4" />
-              +12.5%
+              +2.8%
             </span>
           </div>
           <p className="mt-2 text-tremor-default text-tremor-content">
-            vs. last month $48,294
+            vs. last month 91.6%
           </p>
         </TremorCard>
 
-        {/* Bar Chart */}
+        {/* Fleet Performance Chart */}
         <TremorCard className="md:col-span-2">
           <h4 className="text-tremor-default font-medium text-tremor-content">
-            Monthly Performance
+            Fleet Performance Metrics
           </h4>
           <BarChart
             className="mt-6"
-            data={chartdata}
+            data={telemetryData}
             index="month"
-            categories={["Check-ins", "New Members"]}
+            categories={["Uptime", "Efficiency"]}
             colors={["blue", "green"]}
             yAxisWidth={48}
           />
         </TremorCard>
 
-        {/* Donut Chart */}
+        {/* Equipment Distribution */}
         <TremorCard className="lg:col-span-1">
           <h4 className="text-tremor-default font-medium text-tremor-content">
-            Facility Usage
+            Equipment Distribution
           </h4>
           <DonutChart
             className="mt-6"
-            data={donutdata}
+            data={equipmentTypeData}
             category="value"
             index="name"
             colors={["blue", "cyan", "indigo", "violet", "purple"]}
@@ -348,20 +353,21 @@ function TremorShowcase() {
           />
         </TremorCard>
 
-        {/* Additional Metrics */}
+        {/* Uptime Metric */}
         <TremorCard>
-          <h4 className="text-tremor-default text-tremor-content">Check-in Rate</h4>
-          <Metric>89.3%</Metric>
+          <h4 className="text-tremor-default text-tremor-content">Average Uptime</h4>
+          <Metric>99.2%</Metric>
           <p className="mt-2 text-tremor-default text-tremor-content">
-            Daily average this week
+            Last 30 days across fleet
           </p>
         </TremorCard>
 
+        {/* Alert Response Time */}
         <TremorCard>
-          <h4 className="text-tremor-default text-tremor-content">Member Retention</h4>
-          <Metric>94.2%</Metric>
+          <h4 className="text-tremor-default text-tremor-content">Alert Response</h4>
+          <Metric>4.2min</Metric>
           <p className="mt-2 text-tremor-default text-tremor-content">
-            3-month rolling average
+            Average critical alert response time
           </p>
         </TremorCard>
       </Grid>
@@ -369,25 +375,25 @@ function TremorShowcase() {
   );
 }
 
-// Lucide Icons Showcase
+// Lucide Icons Showcase - Industrial Icons
 function LucideShowcase() {
   const iconSets = [
     {
-      category: "Gym & Fitness",
+      category: "Industrial Equipment",
       icons: [
-        { Icon: Dumbbell, name: "Dumbbell" },
-        { Icon: Activity, name: "Activity" },
-        { Icon: Target, name: "Target" },
-        { Icon: Users, name: "Users" },
+        { Icon: Truck, name: "Fleet" },
+        { Icon: Cpu, name: "Sensors" },
+        { Icon: Gauge, name: "Gauges" },
+        { Icon: Zap, name: "Power" },
       ]
     },
     {
-      category: "Analytics",
+      category: "Monitoring & Analytics",
       icons: [
-        { Icon: BarChart3, name: "BarChart" },
-        { Icon: LineChart, name: "LineChart" },
-        { Icon: TrendingUp, name: "TrendingUp" },
-        { Icon: Sparkles, name: "Sparkles" },
+        { Icon: BarChart3, name: "Analytics" },
+        { Icon: LineChart, name: "Trends" },
+        { Icon: Activity, name: "Telemetry" },
+        { Icon: AlertTriangle, name: "Alerts" },
       ]
     }
   ];
@@ -397,7 +403,7 @@ function LucideShowcase() {
       <ShowcaseHeader
         logo={<LucideLogo />}
         title="Lucide Icons"
-        description="Beautiful & consistent open-source icon library"
+        description="Industrial-focused icon library for equipment monitoring interfaces"
         docsUrl="https://lucide.dev"
       />
       
@@ -431,14 +437,14 @@ function LucideShowcase() {
   );
 }
 
-// Framer Motion Showcase
+// Framer Motion Showcase - Industrial Animations
 function FramerMotionShowcase() {
   const [isVisible, setIsVisible] = useState(true);
 
-  const cards = [
-    { id: "1", title: "Hover Me", color: "bg-blue-500" },
-    { id: "2", title: "Click Me", color: "bg-green-500" },
-    { id: "3", title: "Drag Me", color: "bg-purple-500" },
+  const statusCards = [
+    { id: "1", title: "Operational", color: "bg-green-500" },
+    { id: "2", title: "Warning", color: "bg-amber-500" },
+    { id: "3", title: "Critical", color: "bg-red-500" },
   ];
 
   return (
@@ -446,24 +452,24 @@ function FramerMotionShowcase() {
       <ShowcaseHeader
         logo={<FramerMotionLogo />}
         title="Framer Motion"
-        description="Production-ready motion library for React"
+        description="Smooth animations for industrial UI components and status indicators"
         docsUrl="https://www.framer.com/motion"
       />
       
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Interactive Animations */}
+        {/* Status Indicators */}
         <Card>
           <CardHeader>
-            <CardTitle>Interactive Elements</CardTitle>
-            <CardDescription>Hover, click, and drag interactions</CardDescription>
+            <CardTitle>Equipment Status</CardTitle>
+            <CardDescription>Interactive status indicators with hover states</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex gap-4">
-              {cards.map((card) => (
+              {statusCards.map((card) => (
                 <motion.div
                   key={card.id}
-                  className={`h-24 w-24 cursor-pointer rounded-lg ${card.color} flex items-center justify-center text-white font-medium`}
-                  whileHover={{ scale: 1.05, rotate: 5 }}
+                  className={`h-24 w-24 cursor-pointer rounded-lg ${card.color} flex items-center justify-center text-white font-medium text-sm`}
+                  whileHover={{ scale: 1.05, rotate: 2 }}
                   whileTap={{ scale: 0.95 }}
                   drag
                   dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
@@ -476,11 +482,11 @@ function FramerMotionShowcase() {
           </CardContent>
         </Card>
 
-        {/* Presence Animations */}
+        {/* Alert Animations */}
         <Card>
           <CardHeader>
-            <CardTitle>Presence Animations</CardTitle>
-            <CardDescription>Smooth enter/exit transitions</CardDescription>
+            <CardTitle>Alert Notifications</CardTitle>
+            <CardDescription>Attention-grabbing alert animations</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <Button
@@ -488,7 +494,7 @@ function FramerMotionShowcase() {
               variant="outline"
               className="w-full"
             >
-              Toggle Animation
+              Toggle Alert
             </Button>
             <div className="flex h-32 items-center justify-center">
               <AnimatePresence mode="wait">
@@ -498,30 +504,34 @@ function FramerMotionShowcase() {
                     animate={{ opacity: 1, scale: 1, rotate: 0 }}
                     exit={{ opacity: 0, scale: 0.5, rotate: 180 }}
                     transition={{ duration: 0.5, type: "spring" }}
-                    className="h-24 w-24 rounded-lg bg-gradient-to-br from-orange-400 to-pink-600"
-                  />
+                    className="h-24 w-24 rounded-lg bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center"
+                  >
+                    <AlertTriangle className="h-8 w-8 text-white" />
+                  </motion.div>
                 )}
               </AnimatePresence>
             </div>
           </CardContent>
         </Card>
 
-        {/* Stagger Animation */}
+        {/* Telemetry Stream Animation */}
         <Card className="md:col-span-2">
           <CardHeader>
-            <CardTitle>Stagger Animation</CardTitle>
-            <CardDescription>Sequential animations for list items</CardDescription>
+            <CardTitle>Telemetry Stream</CardTitle>
+            <CardDescription>Real-time data visualization with staggered animations</CardDescription>
           </CardHeader>
           <CardContent>
-            <motion.div className="grid grid-cols-4 gap-2">
+            <motion.div className="grid grid-cols-8 gap-2">
               {[...Array(8)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="h-16 rounded bg-gradient-to-br from-blue-400 to-indigo-600"
+                  className="h-16 rounded bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-white text-xs font-medium"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
-                />
+                >
+                  {`Sensor ${i + 1}`}
+                </motion.div>
               ))}
             </motion.div>
           </CardContent>
