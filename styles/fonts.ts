@@ -19,7 +19,6 @@ export const gtAmerica = localFont({
       style: 'normal',
     },
   ],
-  variable: '--font-gt-america',
   fallback: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
   display: 'swap',
 })
@@ -58,7 +57,6 @@ export const gtPressura = localFont({
       style: 'italic',
     },
   ],
-  variable: '--font-gt-pressura',
   fallback: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
   display: 'swap',
 })
@@ -97,7 +95,6 @@ export const gtPressuraMono = localFont({
       style: 'italic',
     },
   ],
-  variable: '--font-gt-pressura-mono',
   fallback: ['ui-monospace', 'SFMono-Regular', 'SF Mono', 'Consolas', 'Liberation Mono', 'Menlo', 'monospace'],
   display: 'swap',
 })

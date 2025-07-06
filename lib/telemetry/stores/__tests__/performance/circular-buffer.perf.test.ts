@@ -1,6 +1,6 @@
-import { CircularBuffer } from '../../circular-buffer';
-import { TelemetryReading } from '../../../types';
 import { PerformanceMonitor } from '../../../../../test/utils/performance-monitor';
+import { TelemetryReading } from '../../../types';
+import { CircularBuffer } from '../../circular-buffer';
 
 // Skip in CI environments to avoid flaky tests
 const describePerf = process.env.CI ? describe.skip : describe;

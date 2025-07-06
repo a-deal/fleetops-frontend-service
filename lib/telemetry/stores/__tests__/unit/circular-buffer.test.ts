@@ -1,5 +1,5 @@
-import { CircularBuffer } from '../../circular-buffer';
 import { TelemetryReading } from '../../../types';
+import { CircularBuffer } from '../../circular-buffer';
 
 describe('CircularBuffer', () => {
   describe('basic operations', () => {

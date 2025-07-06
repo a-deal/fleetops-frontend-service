@@ -15,6 +15,7 @@
     "build": "pnpm run prebuild && next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "analyze": "ANALYZE=true next build",
     "dev:webpack": "next dev",
     "test": "jest",

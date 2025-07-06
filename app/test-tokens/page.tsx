@@ -4,16 +4,17 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { font, fontClass } from "@/lib/fonts"
 
 export default function TestTokensPage() {
   return (
     <div className="container mx-auto p-8 space-y-8">
-      <h1 className="text-4xl font-bold mb-8 font-heading">Design Token System Test</h1>
+      <h1 className={`text-4xl font-bold mb-8 ${font('heading')}`}>Design Token System Test</h1>
       
       {/* Typography Test */}
       <Card>
         <CardHeader>
-          <CardTitle className="font-heading">Typography with GT America + GT Pressura</CardTitle>
+          <CardTitle className={font('heading')}>Typography with GT America + GT Pressura</CardTitle>
           <CardDescription>GT America for headings, GT Pressura for body text</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -30,14 +31,14 @@ export default function TestTokensPage() {
 
           {/* Heading Sizes */}
           <div>
-            <h3 className="text-lg font-semibold mb-3 font-heading">Heading Hierarchy (GT America)</h3>
+            <h3 className={fontClass('heading', 'text-lg font-semibold mb-3')}>Heading Hierarchy (GT America)</h3>
             <div className="space-y-3">
-              <h1 className="text-4xl font-bold font-heading">H1: Dashboard Title (36px)</h1>
-              <h2 className="text-3xl font-bold font-heading">H2: Section Header (30px)</h2>
-              <h3 className="text-2xl font-semibold font-heading">H3: Card Title (24px)</h3>
-              <h4 className="text-xl font-semibold font-heading">H4: Subsection (20px)</h4>
-              <h5 className="text-lg font-medium font-heading">H5: Label (18px)</h5>
-              <h6 className="text-base font-medium font-heading">H6: Small Label (16px)</h6>
+              <h1 className={fontClass('heading', 'text-4xl font-bold')}>H1: Dashboard Title (36px)</h1>
+              <h2 className={fontClass('heading', 'text-3xl font-bold')}>H2: Section Header (30px)</h2>
+              <h3 className={fontClass('heading', 'text-2xl font-semibold')}>H3: Card Title (24px)</h3>
+              <h4 className={fontClass('heading', 'text-xl font-semibold')}>H4: Subsection (20px)</h4>
+              <h5 className={fontClass('heading', 'text-lg font-medium')}>H5: Label (18px)</h5>
+              <h6 className={fontClass('heading', 'text-base font-medium')}>H6: Small Label (16px)</h6>
             </div>
           </div>
 
@@ -90,7 +91,7 @@ export default function TestTokensPage() {
 
           {/* Monospace Example */}
           <div>
-            <h3 className="text-lg font-semibold mb-3 font-heading">Monospace Text (GT Pressura Mono)</h3>
+            <h3 className={fontClass('heading', 'text-lg font-semibold mb-3')}>Monospace Text (GT Pressura Mono)</h3>
             <div className="space-y-2">
               <code className="block p-4 bg-muted rounded-lg font-mono text-sm">
                 const metrics = {`{`}<br />
@@ -105,9 +106,9 @@ export default function TestTokensPage() {
 
           {/* Font Pairing Example */}
           <div>
-            <h3 className="text-lg font-semibold mb-3 font-heading">Font Pairing in Context</h3>
+            <h3 className={fontClass('heading', 'text-lg font-semibold mb-3')}>Font Pairing in Context</h3>
             <div className="border rounded-lg p-4 space-y-2">
-              <h4 className="text-xl font-semibold font-heading">Member Analytics</h4>
+              <h4 className={fontClass('heading', 'text-xl font-semibold')}>Member Analytics</h4>
               <p className="text-base">Track key performance metrics across your gym locations. Monitor member engagement, revenue trends, and equipment utilization in real-time.</p>
               <div className="flex gap-4 mt-3">
                 <Badge variant="secondary" className="font-mono">ID: GYM-2024-001</Badge>
@@ -115,6 +116,45 @@ export default function TestTokensPage() {
               </div>
             </div>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Font Loading Debug */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Font Loading Debug</CardTitle>
+          <CardDescription>Check if fonts are loading correctly</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-3">
+            <div className="p-4 border rounded-lg">
+              <p className="text-sm font-mono mb-2">font-sans (should be GT Pressura):</p>
+              <p className="font-sans text-lg">The quick brown fox jumps over the lazy dog</p>
+            </div>
+            
+            
+            <div className="p-4 border rounded-lg">
+              <p className="text-sm font-mono mb-2">font('heading') (Direct className - should be GT America):</p>
+              <p className={`${font('heading')} text-lg`}>The quick brown fox jumps over the lazy dog</p>
+            </div>
+            
+            
+            <div className="p-4 border rounded-lg">
+              <p className="text-sm font-mono mb-2">font-mono (should be GT Pressura Mono):</p>
+              <p className="font-mono text-lg">The quick brown fox jumps over the lazy dog</p>
+            </div>
+          </div>
+          
+          <Alert>
+            <AlertTitle>How to debug:</AlertTitle>
+            <AlertDescription>
+              1. Open DevTools → Elements/Inspector<br/>
+              2. Select each text sample above<br/>
+              3. Check the Computed styles → font-family<br/>
+              4. Also check Console for any font loading errors<br/>
+              5. Check Network tab → Filter by "Font" to see if .woff2 files are loading
+            </AlertDescription>
+          </Alert>
         </CardContent>
       </Card>
 

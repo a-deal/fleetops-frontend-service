@@ -6,10 +6,7 @@
 @theme inline {
   /* Design Token Integration */
   
-  /* Font Families */
-  --font-sans: var(--font-gt-pressura);
-  --font-mono: var(--font-gt-pressura-mono);
-  --font-heading: var(--font-gt-america);
+  /* Font Families - Removed as Next.js handles fonts via classes */
   
   /* Color Mapping */
   --color-background: var(--background);
@@ -263,6 +260,10 @@
   --fleet-telemetry-temperature: 0 72.2% 60.6%; /* Brighter red */
   --fleet-telemetry-flow: 142.1 70.6% 55.3%; /* Brighter green */
   --fleet-telemetry-vibration: 280.1 87.0% 60.3%; /* Brighter purple */
+}
+
+@layer utilities {
+  /* Note: font-heading class will be handled by Next.js font system */
 }
 
 @layer base {

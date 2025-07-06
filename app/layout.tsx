@@ -4,7 +4,7 @@ import type { Metadata, Viewport } from "next";
 
 import { cn } from "@/lib/utils";
 import { Providers } from "@/providers";
-import { gtAmerica, gtPressura, gtPressuraMono } from "@/styles/fonts";
+import { gtPressura } from "@/styles/fonts";
 
 export const metadata: Metadata = {
   title: "FleetOps Management Platform",
@@ -47,10 +47,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          gtAmerica.variable,
-          gtPressura.variable,
-          gtPressuraMono.variable
+          "min-h-screen bg-background antialiased",
+          gtPressura.className // Set default body font
         )}
       >
         <Providers>{children}</Providers>

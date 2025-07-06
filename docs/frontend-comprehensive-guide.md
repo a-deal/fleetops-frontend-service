@@ -270,6 +270,56 @@ export const typography = {
 }
 ```
 
+##### ⚠️ Critical: Next.js Font Loading with Tailwind v4
+
+**Issue**: Next.js `localFont` with the `variable` option doesn't work as expected with Tailwind CSS variables.
+
+**Root Cause**: 
+- Next.js `localFont` with `variable: '--font-gt-america'` creates a CSS custom property containing a **class name reference** (e.g., `'__className_abc123'`), not an actual font-family value
+- Tailwind utilities like `font-heading` expect CSS variables to contain direct font-family values
+- Using `font-family: var(--font-gt-america)` fails because it references a class name, not a font
+
+**Solution**: Use Next.js font classes directly instead of CSS variables:
+
+```typescript
+// ❌ WRONG: This won't work with Tailwind utilities
+// styles/fonts.ts
+export const gtAmerica = localFont({
+  src: [...],
+  variable: '--font-gt-america',  // Creates a class reference, not font-family
+});
+
+// globals.css
+.font-heading {
+  font-family: var(--font-heading); // This expects a font-family value!
+}
+
+// ✅ CORRECT: Use className directly
+// lib/fonts.ts
+import { gtAmerica, gtPressura, gtPressuraMono } from '@/styles/fonts';
+
+const fontMap = {
+  sans: gtPressura,
+  heading: gtAmerica,
+  mono: gtPressuraMono,
+} as const;
+
+// Type-safe font utility
+export function font(name: keyof typeof fontMap) {
+  return fontMap[name].className;
+}
+
+// Usage in components
+<h1 className={font('heading')}>Dashboard Title</h1>
+<p className={fontClass('heading', 'text-2xl font-bold')}>With other classes</p>
+```
+
+**Key Points**:
+- Always use `.className` from Next.js font objects for direct application
+- Remove `variable` property from font configs unless specifically needed
+- Create utility functions for type-safe font application
+- The `/test-tokens` page includes font debugging tools for verification
+
 ### Styling Patterns
 
 ```scss
