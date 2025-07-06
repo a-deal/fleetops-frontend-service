@@ -1,0 +1,11 @@
+{
+  "circularBuffer": {
+    "push": { "max": 0.001, "unit": "ms" },
+    "getAll": { "max": 0.1, "unit": "ms" },
+    "memory": { "max": 1024, "unit": "bytes per item" }
+  },
+  "aggregation": {
+    "1second": { "max": 0.5, "unit": "ms per 100 sensors" },
+    "memory": { "max": 256, "unit": "bytes per aggregate" }
+  }
+}
