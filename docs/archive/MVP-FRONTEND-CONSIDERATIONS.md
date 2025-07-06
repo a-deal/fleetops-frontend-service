@@ -1,3 +1,6 @@
+> ⚠️ **ARCHIVED**: MVP decisions integrated into frontend-implementation-guide.md
+> See [frontend-implementation-guide.md](../frontend-implementation-guide.md) for current version.
+
 # MVP Frontend Implementation Considerations
 
 ## Executive Summary

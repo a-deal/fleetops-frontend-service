@@ -1,3 +1,6 @@
+> ⚠️ **ARCHIVED**: Daily logs consolidated into project-journal.md
+> See [project-journal.md](../project-journal.md) for current status.
+
 # Day 2 Detailed Plan: Fleet-Aware Foundation Systems
 
 ## Consensus Decision: Hybrid Approach

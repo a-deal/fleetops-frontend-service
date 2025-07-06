@@ -1,3 +1,6 @@
+> ⚠️ **ARCHIVED**: Architecture details moved to system-architecture-guide.md
+> See [system-architecture-guide.md](../system-architecture-guide.md) for current version.
+
 # Enterprise Fleet Management & Prediction Platform Frontend Architecture Plan
 
 ## Executive Summary

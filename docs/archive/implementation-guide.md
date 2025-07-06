@@ -1,3 +1,6 @@
+> ⚠️ **ARCHIVED**: Content merged into frontend-implementation-guide.md
+> See [frontend-implementation-guide.md](../frontend-implementation-guide.md) for current version.
+
 # Enterprise Fleet Management Platform - Implementation Guide
 
 ## Overview

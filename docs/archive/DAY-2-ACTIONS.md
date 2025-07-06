@@ -1,3 +1,9 @@
+> ⚠️ **ARCHIVED**: Daily logs consolidated into project-journal.md
+> See [project-journal.md](../project-journal.md) for current status.
+
+> ⚠️ **ARCHIVED**: Day 2 actions have been completed and documented.
+> See [project-journal.md](./docs/project-journal.md#day-2-pwa--testing) for summary.
+
 # DAY 2 IMPLEMENTATION ACTIONS
 *Generated with consensus from Gemini Pro & Flash - Executable Implementation Guide*
 

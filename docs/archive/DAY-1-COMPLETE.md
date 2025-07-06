@@ -1,3 +1,6 @@
+> ⚠️ **ARCHIVED**: Daily logs consolidated into project-journal.md
+> See [project-journal.md](../project-journal.md) for current status.
+
 # Day 1 Complete Setup Documentation
 
 ## Overview

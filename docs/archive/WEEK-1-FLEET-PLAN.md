@@ -1,3 +1,6 @@
+> ⚠️ **ARCHIVED**: Daily logs consolidated into project-journal.md
+> See [project-journal.md](../project-journal.md) for current status.
+
 # Week 1 Fleet Management Platform Plan
 
 ## Overview

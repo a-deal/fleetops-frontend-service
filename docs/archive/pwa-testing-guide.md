@@ -1,3 +1,6 @@
+> ⚠️ **ARCHIVED**: This document is preserved for historical context.
+> See [../testing-comprehensive-guide.md](./../testing-comprehensive-guide.md) for current practices.
+
 # PWA Testing Guide & Results
 
 ## Overview
