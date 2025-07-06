@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# Run lint-staged for pre-commit checks
+pnpm exec lint-staged

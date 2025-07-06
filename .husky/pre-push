@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+echo "🔍 Running pre-push checks..."
+
+# Run full test suite
+echo "📋 Running all tests..."
+pnpm test:all || {
+  echo "❌ Tests failed. Please fix before pushing."
+  exit 1
+}
+
+# Verify production build
+echo "🏗️  Verifying production build..."
+pnpm build || {
+  echo "❌ Build failed. Please fix before pushing."
+  exit 1
+}
+
+echo "✅ All pre-push checks passed!"

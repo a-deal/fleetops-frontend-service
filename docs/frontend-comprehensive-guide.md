@@ -5,6 +5,7 @@
 > **Status**: Living document
 
 ## Table of Contents
+
 1. [Overview](#overview)
 2. [Technology Stack](#technology-stack)
 3. [MVP Considerations](#mvp-considerations)
@@ -34,37 +35,101 @@ FleetOps Frontend is a field-ready industrial monitoring system designed for har
 ```typescript
 // Frontend Stack
 const stack = {
-  framework: "Next.js 14 (App Router)",
-  language: "TypeScript",
-  styling: "Tailwind CSS + CSS Modules",
-  components: "shadcn/ui (selective)",
-  state: "Zustand",
-  realtime: "WebSocket (native)",
-  offline: "@serwist/next",
-  testing: "Jest + Playwright",
-  deployment: "Vercel"
+  framework: 'Next.js 14 (App Router)',
+  language: 'TypeScript',
+  styling: 'Tailwind CSS + CSS Modules',
+  components: 'shadcn/ui (selective)',
+  state: 'Zustand',
+  realtime: 'WebSocket (native)',
+  offline: '@serwist/next',
+  testing: 'Jest + Playwright',
+  deployment: 'Vercel',
 };
 ```
 
 ### Key Decisions & Rationale
 
 #### Why Next.js App Router?
+
 - **Server Components**: Reduce client bundle by 40%
 - **Streaming**: Progressive loading on slow networks
 - **Built-in Optimization**: Image/font/script optimization
 - **Edge Runtime**: Deploy close to field sites
 
 #### Why Zustand over Redux?
+
 - **8KB vs 72KB**: Critical for 2G networks
 - **No Boilerplate**: Faster development
 - **React 18 Ready**: Concurrent features support
 - **TypeScript First**: Better DX
 
 #### Why Native WebSocket?
+
 - **13KB Saved**: No Socket.io overhead
 - **Binary Support**: Efficient sensor data transfer
 - **Custom Protocol**: Field-specific optimizations
 - **Direct Control**: Better reconnection handling
+
+## Development Workflow & Quality Assurance
+
+### Git Hooks & Code Quality
+
+We use Husky and lint-staged to ensure code quality before commits reach the repository. This prevents broken code from entering the codebase and maintains consistent formatting across the team.
+
+#### Pre-Commit Hooks (Fast Checks ~10s)
+
+Runs automatically on `git commit` - targets only staged files for speed:
+
+- **ESLint** with `--fix` flag (auto-fixes common issues)
+- **Prettier** formatting (consistent code style)
+- **TypeScript** type checking (`--noEmit --incremental`)
+- **Jest** tests for changed files only (`--findRelatedTests`)
+
+#### Pre-Push Hooks (Comprehensive Checks)
+
+Runs before pushing to remote - ensures branch stability:
+
+- Full test suite (`pnpm test:all`) with coverage
+- Production build verification (`pnpm build`)
+- Validates PWA assets and service worker
+
+#### Emergency Bypass
+
+For urgent fixes, hooks can be bypassed:
+
+```bash
+git commit --no-verify  # Skip pre-commit
+git push --no-verify    # Skip pre-push
+```
+
+**Use sparingly** - bypassing hooks risks introducing issues.
+
+### Configuration Details
+
+Hooks are configured in `package.json`:
+
+```json
+{
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": ["eslint --fix --cache", "prettier --write"],
+    "*.{ts,tsx}": [
+      "bash -c 'tsc --noEmit --incremental --tsBuildInfoFile .tsbuildinfo.precommit'"
+    ],
+    "lib/**/*.{ts,tsx}": ["jest --bail --findRelatedTests"],
+    "*.{json,md,css}": ["prettier --write"]
+  }
+}
+```
+
+### Why This Approach?
+
+🎯 **Simple Explanation**: Like a bouncer at a club, but for code. Fast checks at the door (commit), thorough search before the VIP area (push).
+
+⚠️ **Field Operations Context**: Technicians need reliable code. A formatting error or type mismatch could cause tablet crashes during critical repairs.
+
+💥 **Without It**: Broken builds discovered after merge, inconsistent code style, type errors in production, failed deployments during emergencies.
+
+✅ **Technician Benefit**: Every code push is pre-validated. No surprises during field deployments. Consistent, reliable application behavior.
 
 ## MVP Considerations
 
@@ -129,14 +194,14 @@ app/
 
 ```typescript
 // Example: Field-Ready Component
-export function SensorReading({ 
-  sensorId, 
-  className 
+export function SensorReading({
+  sensorId,
+  className
 }: SensorReadingProps) {
   const { data, status } = useTelemetry(sensorId);
-  
+
   return (
-    <div 
+    <div
       className={cn(
         "touch-target", // Min 44x44px
         "high-contrast", // WCAG AAA
@@ -145,8 +210,8 @@ export function SensorReading({
       )}
     >
       <StatusIndicator status={status} />
-      <Value 
-        value={data?.value} 
+      <Value
+        value={data?.value}
         unit={data?.unit}
         precision={2}
       />
@@ -201,6 +266,7 @@ Crystal clear readability of critical values even in worst conditions. Numbers n
 ### When to Use shadcn/ui
 
 **USE shadcn/ui for:**
+
 - Form inputs (field-tested patterns)
 - Modals/Dialogs (accessibility built-in)
 - Data tables (sorting/filtering)
@@ -209,6 +275,7 @@ Crystal clear readability of critical values even in worst conditions. Numbers n
 - Common UI Patterns
 
 **BUILD CUSTOM for:**
+
 - Telemetry displays (performance critical)
 - Real-time charts (specific requirements)
 - Status indicators (brand-specific)
@@ -220,8 +287,12 @@ Crystal clear readability of critical values even in worst conditions. Numbers n
 
 ```tsx
 <QueryProvider>
-  <ThemeProvider>           // next-themes for base light/dark
-    <FleetThemeProvider>    // Fleet-specific extensions
+  <ThemeProvider>
+    {' '}
+    // next-themes for base light/dark
+    <FleetThemeProvider>
+      {' '}
+      // Fleet-specific extensions
       {children}
     </FleetThemeProvider>
   </ThemeProvider>
@@ -238,16 +309,16 @@ Crystal clear readability of critical values even in worst conditions. Numbers n
 
 ```css
 /* Status Colors (Following ANSI/ISA Standards) */
---fleet-status-operational: 142.1 70.6% 45.3%;  /* Green - System running normally */
---fleet-status-warning: 45.4 92.9% 47.4%;       /* Amber - Attention required */
---fleet-status-critical: 0 72.2% 50.6%;         /* Red - Immediate action needed */
---fleet-status-offline: 0 0% 63.9%;             /* Gray - No connection */
+--fleet-status-operational: 142.1 70.6% 45.3%; /* Green - System running normally */
+--fleet-status-warning: 45.4 92.9% 47.4%; /* Amber - Attention required */
+--fleet-status-critical: 0 72.2% 50.6%; /* Red - Immediate action needed */
+--fleet-status-offline: 0 0% 63.9%; /* Gray - No connection */
 
 /* Equipment States */
---fleet-equipment-active: /* Green - Equipment running */
---fleet-equipment-idle: /* Blue - Equipment ready but not active */
---fleet-equipment-maintenance: /* Amber - Scheduled maintenance */
---fleet-equipment-fault: /* Red - Equipment failure */
+--fleet-equipment-active: /* Green - Equipment running */ --fleet-equipment-idle:
+  /* Blue - Equipment ready but not active */
+  --fleet-equipment-maintenance: /* Amber - Scheduled maintenance */
+  --fleet-equipment-fault: /* Red - Equipment failure */;
 ```
 
 #### Typography Implementation
@@ -256,25 +327,26 @@ Crystal clear readability of critical values even in worst conditions. Numbers n
 // Font families configured
 export const typography = {
   fontFamily: {
-    sans: 'var(--font-gt-pressura)',        // Body text & UI
-    mono: 'var(--font-gt-pressura-mono)',   // Technical data
-    heading: 'var(--font-gt-america)',      // Headings only
+    sans: 'var(--font-gt-pressura)', // Body text & UI
+    mono: 'var(--font-gt-pressura-mono)', // Technical data
+    heading: 'var(--font-gt-america)', // Headings only
   },
-  
+
   // Minimum readable sizes for field conditions
   ui: {
-    caption: ['0.875rem', { lineHeight: '1.25rem' }],  // 14px minimum
-    body: ['1rem', { lineHeight: '1.5rem' }],          // 16px default
-    lead: ['1.125rem', { lineHeight: '1.75rem' }],     // 18px emphasis
+    caption: ['0.875rem', { lineHeight: '1.25rem' }], // 14px minimum
+    body: ['1rem', { lineHeight: '1.5rem' }], // 16px default
+    lead: ['1.125rem', { lineHeight: '1.75rem' }], // 18px emphasis
   },
-}
+};
 ```
 
 ##### ⚠️ Critical: Next.js Font Loading with Tailwind v4
 
 **Issue**: Next.js `localFont` with the `variable` option doesn't work as expected with Tailwind CSS variables.
 
-**Root Cause**: 
+**Root Cause**:
+
 - Next.js `localFont` with `variable: '--font-gt-america'` creates a CSS custom property containing a **class name reference** (e.g., `'__className_abc123'`), not an actual font-family value
 - Tailwind utilities like `font-heading` expect CSS variables to contain direct font-family values
 - Using `font-family: var(--font-gt-america)` fails because it references a class name, not a font
@@ -315,6 +387,7 @@ export function font(name: keyof typeof fontMap) {
 ```
 
 **Key Points**:
+
 - Always use `.className` from Next.js font objects for direct application
 - Remove `variable` property from font configs unless specifically needed
 - Create utility functions for type-safe font application
@@ -326,14 +399,14 @@ export function font(name: keyof typeof fontMap) {
 // Use CSS Modules for component styles
 .sensor-card {
   @apply rounded-lg border bg-card p-4;
-  
+
   // Custom properties for dynamic values
   --status-color: var(--color-normal);
-  
+
   &[data-status="warning"] {
     --status-color: var(--color-warning);
   }
-  
+
   &[data-status="critical"] {
     --status-color: var(--color-critical);
     animation: pulse 2s infinite;
@@ -366,31 +439,28 @@ export class WebSocketManager {
   private ws: WebSocket | null = null;
   private reconnectAttempts = 0;
   private queue: Message[] = [];
-  
+
   connect() {
     this.ws = new WebSocket(WS_URL);
-    
+
     this.ws.onopen = () => {
       this.reconnectAttempts = 0;
       this.flushQueue();
     };
-    
+
     this.ws.onmessage = (event) => {
       const data = parseMessage(event.data);
       telemetryStore.update(data);
     };
-    
+
     this.ws.onclose = () => {
       this.scheduleReconnect();
     };
   }
-  
+
   private scheduleReconnect() {
-    const delay = Math.min(
-      1000 * Math.pow(2, this.reconnectAttempts),
-      30000
-    );
-    
+    const delay = Math.min(1000 * Math.pow(2, this.reconnectAttempts), 30000);
+
     setTimeout(() => {
       this.reconnectAttempts++;
       this.connect();
@@ -407,20 +477,20 @@ import { startTransition } from 'react';
 
 const telemetryStore = create((set) => ({
   readings: new Map(),
-  
+
   updateBatch: (updates: Reading[]) => {
     startTransition(() => {
       set((state) => {
         const newReadings = new Map(state.readings);
-        
-        updates.forEach(reading => {
+
+        updates.forEach((reading) => {
           newReadings.set(reading.sensorId, reading);
         });
-        
+
         return { readings: newReadings };
       });
     });
-  }
+  },
 }));
 ```
 
@@ -428,18 +498,19 @@ const telemetryStore = create((set) => ({
 
 ### Critical Metrics
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| First Contentful Paint | <1.8s | Lighthouse |
-| Time to Interactive | <3.5s | Lighthouse |
-| Bundle Size (gzipped) | <350KB | Webpack |
-| Memory Usage | <100MB | Chrome DevTools |
-| Frame Rate | 60fps | Performance API |
-| WebSocket Latency | <100ms | Custom metrics |
+| Metric                 | Target | Measurement     |
+| ---------------------- | ------ | --------------- |
+| First Contentful Paint | <1.8s  | Lighthouse      |
+| Time to Interactive    | <3.5s  | Lighthouse      |
+| Bundle Size (gzipped)  | <350KB | Webpack         |
+| Memory Usage           | <100MB | Chrome DevTools |
+| Frame Rate             | 60fps  | Performance API |
+| WebSocket Latency      | <100ms | Custom metrics  |
 
 ### Optimization Strategies
 
 1. **Code Splitting**
+
    ```typescript
    // Lazy load heavy components
    const Charts = dynamic(() => import('@/components/charts'), {
@@ -449,6 +520,7 @@ const telemetryStore = create((set) => ({
    ```
 
 2. **Image Optimization**
+
    ```typescript
    // Use Next.js Image with industrial presets
    <Image
@@ -476,6 +548,7 @@ const telemetryStore = create((set) => ({
 ### 10-Week Realistic Timeline
 
 #### Weeks 1-2: Foundation
+
 - [x] Project setup with Next.js 14
 - [x] Fleet theme implementation
 - [x] Basic routing structure
@@ -483,24 +556,28 @@ const telemetryStore = create((set) => ({
 - [ ] WebSocket manager scaffold
 
 #### Weeks 3-4: Core Components
+
 - [ ] Equipment list/detail pages
 - [ ] Basic telemetry display
 - [ ] Status indicators
 - [ ] Navigation shell
 
 #### Weeks 5-6: Real-Time Features
+
 - [ ] WebSocket integration
 - [ ] Live telemetry updates
 - [ ] Alert system
 - [ ] Offline queue
 
 #### Weeks 7-8: Data Visualization
+
 - [ ] Time-series charts
 - [ ] Equipment health widgets
 - [ ] Performance dashboard
 - [ ] Historical views
 
 #### Weeks 9-10: Field Hardening
+
 - [ ] Performance optimization
 - [ ] PWA enhancements
 - [ ] Error boundaries
@@ -568,6 +645,7 @@ const telemetryStore = create((set) => ({
 - [Testing Guide](./testing-comprehensive-guide.md) - Quality assurance
 
 ### Architecture References
+
 - [System Architecture](./frontend-architecture-plan.md) - High-level design
 - [MVP Decisions](./archive/MVP-FRONTEND-CONSIDERATIONS.md) - Original rationale
 

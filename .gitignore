@@ -45,3 +45,4 @@ next-env.d.ts
 
 # TypeScript compilation output
 /dist/
+.tsbuildinfo.precommit

@@ -5,6 +5,7 @@
 > **Status**: Active development log
 
 ## Table of Contents
+
 1. [Week 1: Foundation](#week-1-foundation)
 2. [Day 1: Project Setup](#day-1-project-setup)
 3. [Day 2: PWA & Testing](#day-2-pwa--testing)
@@ -15,9 +16,11 @@
 ## Week 1: Foundation
 
 ### Overview
+
 First week focused on project setup, PWA implementation, testing infrastructure, and beginning telemetry development. Made significant progress on foundational elements.
 
 ### Week 1 Goals (From Planning)
+
 - ✅ Project setup with Next.js 14 App Router
 - ✅ Implement PWA with Serwist
 - ✅ Configure Jest for testing
@@ -80,13 +83,13 @@ const colors = {
   fleet: {
     navy: { DEFAULT: '#0A1929', light: '#1E3A5F' },
     orange: { DEFAULT: '#FF6B35', dark: '#CC5528' },
-    gray: { 50: '#F8FAFC', 900: '#0F172A' }
+    gray: { 50: '#F8FAFC', 900: '#0F172A' },
   },
   status: {
     normal: '#10B981',
-    warning: '#F59E0B', 
-    critical: '#EF4444'
-  }
+    warning: '#F59E0B',
+    critical: '#EF4444',
+  },
 };
 ```
 
@@ -130,10 +133,11 @@ const colors = {
 ### Technical Solutions
 
 1. **PWA Cache Versioning**
+
    ```javascript
    const getPwaVersion = () => {
      try {
-       return execSync("git rev-parse --short HEAD").toString().trim();
+       return execSync('git rev-parse --short HEAD').toString().trim();
      } catch {
        return new Date().getTime().toString();
      }
@@ -141,11 +145,14 @@ const colors = {
    ```
 
 2. **Jest TypeScript Fix**
+
    ```javascript
-   projects: [{
-     preset: 'ts-jest', // Must be in EACH project
-     testEnvironment: 'node'
-   }]
+   projects: [
+     {
+       preset: 'ts-jest', // Must be in EACH project
+       testEnvironment: 'node',
+     },
+   ];
    ```
 
 3. **Performance Test Pattern**
@@ -162,6 +169,7 @@ const colors = {
 ### Action Items Completed
 
 From Day 2 Action Plan:
+
 - ✅ Add PNG icons to manifest.json
 - ✅ Implement dynamic PWA versioning
 - ✅ Update runtime cache names with versions
@@ -170,6 +178,14 @@ From Day 2 Action Plan:
 - ✅ Convert performance tests to characterization
 - ✅ Complete CircularBuffer implementation
 - ✅ Consolidate testing documentation
+
+Additional Day 2 Accomplishments:
+
+- ✅ Implement Husky + lint-staged for pre-commit hooks
+- ✅ Configure staged-only fast checks (ESLint, Prettier, TypeScript, Jest)
+- ✅ Set up comprehensive pre-push validation
+- ✅ Add JSDoc type annotation to .prettierrc.js
+- ✅ Document git hooks in frontend guide
 
 ## Key Decisions Log
 
@@ -180,17 +196,23 @@ From Day 2 Action Plan:
    - Rationale: Maturity over speed (vs Vitest)
    - Confidence: 8-9/10 from consensus analysis
 
-2. **State Management: Zustand**
+2. **Pre-Commit Strategy: Husky + lint-staged**
+   - Date: 2025-07-06
+   - Rationale: Industry standard, fast staged-only checks
+   - Trade-off: Build verification moved to pre-push for speed
+   - Confidence: 9/10 from consensus (O4-mini, Gemini Pro, DeepSeek)
+
+3. **State Management: Zustand**
    - Date: 2025-07-05
    - Rationale: 8KB vs Redux's 72KB, React 18 ready
    - Impact: Better performance on 2G networks
 
-3. **Real-time: Native WebSocket**
+4. **Real-time: Native WebSocket**
    - Date: 2025-07-05
    - Rationale: No Socket.io overhead (saves 13KB)
    - Trade-off: More implementation work
 
-4. **PWA Approach: Serwist**
+5. **PWA Approach: Serwist**
    - Date: 2025-07-05
    - Rationale: Modern, TypeScript-first, active maintenance
    - Result: Successful implementation with versioning
@@ -250,30 +272,35 @@ From Day 2 Action Plan:
 > 📍 **Note**: See [Development Roadmap](./DEVELOPMENT-ROADMAP.md) for complete timeline
 
 ### Day 3 Goals (Next)
+
 - [ ] Complete telemetry aggregation logic (1-second aggregates)
 - [ ] Implement Web Worker for processing
 - [ ] Set up WebSocket manager with reconnection
 - [ ] Integration testing end-to-end
 
 ### Week 2 Goals
+
 - [ ] Complete design system (20+ components)
 - [ ] Storybook documentation
 - [ ] IndexedDB persistence layer
 - [ ] Offline queue implementation
 
 ### Week 3 Goals
+
 - [ ] Real-time data flow end-to-end
 - [ ] Implement chart components
 - [ ] Add equipment list/detail pages
 - [ ] Set up Zustand stores
 
 ### Critical Path Items
+
 1. WebSocket resilience (most critical for field ops)
 2. Memory-safe data structures (prevent tablet crashes)
 3. Offline queue implementation (handle network drops)
 4. Performance monitoring setup (track regressions)
 
 ### Risk Mitigation
+
 - **Risk**: WebSocket complexity underestimated
 - **Mitigation**: Start with simple implementation, iterate
 - **Risk**: Performance on low-end tablets
@@ -286,21 +313,25 @@ From Day 2 Action Plan:
 ### Date: [DATE]
 
 **Yesterday:**
+
 - What was completed
 - What was learned
 
 **Today:**
+
 - Primary focus
 - Specific goals
 
 **Blockers:**
+
 - Technical challenges
 - Decisions needed
 
 **Notes:**
+
 - Important discoveries
 - Links to commits/PRs
 
 ---
 
-*This journal is updated daily during active development. Each entry captures progress, decisions, and learnings to maintain project context and momentum.*
+_This journal is updated daily during active development. Each entry captures progress, decisions, and learnings to maintain project context and momentum._
