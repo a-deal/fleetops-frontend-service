@@ -623,16 +623,28 @@ This section tracks the execution of the monorepo migration and service separati
 
 ### Phase 2: Cloud Service Development (Weeks 1-8)
 
-**Status**: Not Started  
-**Planned Start**: After Phase 1 completion
+**Status**: In Progress  
+**Started**: 2025-07-07  
+**Progress**: Foundation Complete (~30%)
 
-#### Checklist
-- [ ] AWS IoT Core integration
-- [ ] AWS Cognito authentication setup
-- [ ] WebSocket manager for cloud connections
-- [ ] RBAC implementation
-- [ ] Telemetry data pipeline design
-- [ ] Frontend dashboards
+#### Completed ✅
+- [x] AWS IoT Core integration - SDK installed and configured
+- [x] WebSocket manager for cloud connections - Built with reconnection logic
+- [x] Basic telemetry data pipeline - Real-time streaming implemented
+- [x] Frontend dashboard foundation - Telemetry dashboard with equipment grouping
+- [x] Environment configuration - `.env.local.example` with AWS settings
+- [x] Project structure - Clean separation of AWS libs, hooks, and providers
+
+#### In Progress 🔄
+- [ ] AWS Cognito authentication setup (credentials provider created, need full integration)
+- [ ] RBAC implementation (pending Cognito setup)
+
+#### Remaining 📋
+- [ ] Data persistence with DynamoDB
+- [ ] Real-time alerting system
+- [ ] Fleet management UI
+- [ ] Historical data analytics
+- [ ] Multi-tenant support
 
 ### Phase 3: Debug Tool Evaluation (Week 6-7)
 
@@ -848,3 +860,110 @@ This configuration:
 - Enables per-app test execution with `pnpm --filter @apps/debug test`
 - Centralizes coverage reporting
 - Scales automatically as new apps/packages are added
+
+## Phase 2: Cloud Service Implementation Details
+
+### AWS IoT Core Integration Architecture
+
+**Implementation Date**: 2025-07-07
+
+#### Architecture Overview
+```
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  Edge Sensors   │────▶│  AWS IoT Core    │────▶│ FleetOps Cloud  │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+                              │                            │
+                              ▼                            ▼
+                        ┌──────────────┐          ┌──────────────┐
+                        │   DynamoDB   │          │  Telemetry   │
+                        │  (Future)    │          │  Dashboard   │
+                        └──────────────┘          └──────────────┘
+```
+
+#### Key Components Implemented
+
+1. **AWS SDK Integration** (`apps/cloud/package.json`)
+   ```json
+   "@aws-sdk/client-iot": "3.840.0"
+   "@aws-sdk/client-iot-data-plane": "3.840.0"
+   "@aws-sdk/client-cognito-identity-provider": "3.840.0"
+   "aws-iot-device-sdk-v2": "1.22.0"
+   ```
+
+2. **IoT Connection Manager** (`lib/aws/iot-connection.ts`)
+   - WebSocket-based MQTT connection
+   - Automatic reconnection logic
+   - Event-driven architecture
+   - QoS support for reliable messaging
+
+3. **React Integration** (`hooks/use-iot-connection.ts`)
+   - Custom hook for IoT lifecycle management
+   - Connection state tracking
+   - Error handling and recovery
+   - Auto-connect capabilities
+
+4. **Telemetry Provider** (`providers/telemetry-provider.tsx`)
+   - React Context for telemetry data
+   - Real-time data streaming
+   - Equipment-based data grouping
+   - Configurable buffer size
+
+5. **Dashboard UI** (`components/telemetry-dashboard.tsx`)
+   - Real-time equipment monitoring
+   - Metric visualization
+   - Connection status indicators
+   - Responsive grid layout
+
+#### Environment Configuration
+
+Created `.env.local.example` with required AWS settings:
+- `NEXT_PUBLIC_AWS_REGION`: AWS region for services
+- `NEXT_PUBLIC_AWS_IOT_ENDPOINT`: IoT Core endpoint URL
+- `NEXT_PUBLIC_AWS_COGNITO_USER_POOL_ID`: For authentication
+- `NEXT_PUBLIC_AWS_COGNITO_CLIENT_ID`: App client ID
+- `NEXT_PUBLIC_AWS_COGNITO_IDENTITY_POOL_ID`: For AWS credentials
+
+#### Data Model Updates
+
+Updated `@repo/telemetry` types to align with cloud architecture:
+```typescript
+interface TelemetryReading {
+  equipmentId: string;      // Identifies the equipment/sensor
+  timestamp: number;        // Unix timestamp
+  metrics: Record<string, number>;  // Flexible metric storage
+}
+```
+
+#### Security Considerations
+
+1. **Credentials Management**
+   - Development: Static credentials via environment variables
+   - Production: Cognito Identity Pool integration planned
+   - No credentials committed to repository
+
+2. **Connection Security**
+   - WebSocket over TLS for all connections
+   - IoT Core policies for device authorization
+   - Client ID uniqueness enforced
+
+#### Next Implementation Steps
+
+1. **Cognito Integration** (Priority: High)
+   - User authentication flow
+   - Federated identity for IoT credentials
+   - Role-based access control
+
+2. **Data Persistence** (Priority: High)
+   - DynamoDB table design
+   - Time-series data optimization
+   - Query patterns for analytics
+
+3. **Fleet Management UI** (Priority: Medium)
+   - Equipment registration
+   - Fleet overview dashboard
+   - Alert configuration
+
+4. **Real-time Alerting** (Priority: Medium)
+   - Threshold-based alerts
+   - SNS integration
+   - Alert history tracking
