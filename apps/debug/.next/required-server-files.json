@@ -277,6 +277,11 @@
     "htmlLimitedBots": "Mediapartners-Google|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti",
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts",
+    "transpilePackages": [
+      "@repo/ui",
+      "@repo/telemetry",
+      "@repo/theme"
+    ],
     "turbopack": {
       "root": "/Users/dealair/src/fleetops-frontend-service"
     }

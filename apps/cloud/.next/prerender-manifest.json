@@ -24,13 +24,37 @@
         "x-next-revalidated-tags",
         "x-next-revalidate-tag-token"
       ]
+    },
+    "/telemetry": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/telemetry",
+      "dataRoute": "/telemetry.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
     }
   },
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "bda42707cad346c22457b8a2b6a81f04",
-    "previewModeSigningKey": "a1ddc0d20b32867971910bb13280f530c0acd2f2e16ede9ede5cf7d3920ff592",
-    "previewModeEncryptionKey": "a27836684beebe6262957108d219d1efdfd9620c245d4e54f4b711f6c0952d93"
+    "previewModeId": "e260d84ffab58d90d7f3bae770cc8696",
+    "previewModeSigningKey": "ed146256bd01961a69cf1cd86f17a2f71c529e4425f0e65c34edf3e22b2bd8f0",
+    "previewModeEncryptionKey": "3f6bccecb41dd3f707abbfce6772a7c3a3fd553e4c55cde761a85155316b690a"
   }
 }

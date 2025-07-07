@@ -1,4 +1,5 @@
 import { cn } from '@repo/ui';
+import Link from 'next/link';
 
 export default function HomePage() {
   return (
@@ -21,6 +22,12 @@ export default function HomePage() {
               Service initialization in progress
             </p>
           </div>
+          <Link
+            href="/telemetry"
+            className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          >
+            Open Telemetry Dashboard
+          </Link>
         </div>
       </div>
     </main>

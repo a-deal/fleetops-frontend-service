@@ -18,13 +18,6 @@
       "static/chunks/707-b0f53cf015c94446.js",
       "static/chunks/app/layout-486c03b39a330c0a.js"
     ],
-    "/hello/page": [
-      "static/chunks/webpack-199927456648dcee.js",
-      "static/chunks/2b6443d0-fb38e58751e48f21.js",
-      "static/chunks/721-a6c591edf9324f9f.js",
-      "static/chunks/main-app-8f4f2974585e0794.js",
-      "static/chunks/app/hello/page-c4db777c32a644d8.js"
-    ],
     "/page": [
       "static/chunks/webpack-199927456648dcee.js",
       "static/chunks/2b6443d0-fb38e58751e48f21.js",
@@ -43,12 +36,26 @@
       "static/chunks/main-app-8f4f2974585e0794.js",
       "static/chunks/app/offline/page-cf15de799e0597ec.js"
     ],
+    "/pwa-test/page": [
+      "static/chunks/webpack-199927456648dcee.js",
+      "static/chunks/2b6443d0-fb38e58751e48f21.js",
+      "static/chunks/721-a6c591edf9324f9f.js",
+      "static/chunks/main-app-8f4f2974585e0794.js",
+      "static/chunks/app/pwa-test/page-2200d8402e668972.js"
+    ],
     "/test/page": [
       "static/chunks/webpack-199927456648dcee.js",
       "static/chunks/2b6443d0-fb38e58751e48f21.js",
       "static/chunks/721-a6c591edf9324f9f.js",
       "static/chunks/main-app-8f4f2974585e0794.js",
       "static/chunks/app/test/page-6cae97e5c37130ed.js"
+    ],
+    "/hello/page": [
+      "static/chunks/webpack-199927456648dcee.js",
+      "static/chunks/2b6443d0-fb38e58751e48f21.js",
+      "static/chunks/721-a6c591edf9324f9f.js",
+      "static/chunks/main-app-8f4f2974585e0794.js",
+      "static/chunks/app/hello/page-c4db777c32a644d8.js"
     ],
     "/test-tokens/page": [
       "static/chunks/webpack-199927456648dcee.js",
@@ -69,13 +76,6 @@
       "static/chunks/468-7b75226305d372fc.js",
       "static/chunks/963-ea7dfddea7b5278e.js",
       "static/chunks/app/theme-test/page-5d6dd4b40121a0ab.js"
-    ],
-    "/pwa-test/page": [
-      "static/chunks/webpack-199927456648dcee.js",
-      "static/chunks/2b6443d0-fb38e58751e48f21.js",
-      "static/chunks/721-a6c591edf9324f9f.js",
-      "static/chunks/main-app-8f4f2974585e0794.js",
-      "static/chunks/app/pwa-test/page-2200d8402e668972.js"
     ],
     "/showcase/layout": [
       "static/chunks/webpack-199927456648dcee.js",

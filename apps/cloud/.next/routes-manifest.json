@@ -26,6 +26,12 @@
       "regex": "^/_not\\-found(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/telemetry",
+      "regex": "^/telemetry(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/telemetry(?:/)?$"
     }
   ],
   "dataRoutes": [],
