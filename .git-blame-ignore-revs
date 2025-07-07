@@ -1,0 +1,3 @@
+# Monorepo migration - large structural change
+# This commit moved all application code from root to apps/debug/
+9b42ff0
