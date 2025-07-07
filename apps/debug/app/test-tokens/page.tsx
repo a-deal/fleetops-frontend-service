@@ -134,7 +134,7 @@ export default function TestTokensPage() {
             
             
             <div className="p-4 border rounded-lg">
-              <p className="text-sm font-mono mb-2">font('heading') (Direct className - should be GT America):</p>
+              <p className="text-sm font-mono mb-2">font(&apos;heading&apos;) (Direct className - should be GT America):</p>
               <p className={`${font('heading')} text-lg`}>The quick brown fox jumps over the lazy dog</p>
             </div>
             
@@ -152,7 +152,7 @@ export default function TestTokensPage() {
               2. Select each text sample above<br/>
               3. Check the Computed styles → font-family<br/>
               4. Also check Console for any font loading errors<br/>
-              5. Check Network tab → Filter by "Font" to see if .woff2 files are loading
+              5. Check Network tab → Filter by &quot;Font&quot; to see if .woff2 files are loading
             </AlertDescription>
           </Alert>
         </CardContent>

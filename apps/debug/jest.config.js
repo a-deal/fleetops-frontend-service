@@ -10,10 +10,10 @@ module.exports = {
       moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/$1'
       },
-      globals: {
-        'ts-jest': {
+      transform: {
+        '^.+\\.tsx?$': ['ts-jest', {
           tsconfig: 'tsconfig.test.json'
-        }
+        }]
       }
     },
     {
@@ -24,11 +24,11 @@ module.exports = {
       moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/$1'
       },
-      globals: {
-        'ts-jest': {
+      transform: {
+        '^.+\\.tsx?$': ['ts-jest', {
           tsconfig: 'tsconfig.test.json',
           isolatedModules: true // Faster for perf tests
-        }
+        }]
       }
     }
   ],

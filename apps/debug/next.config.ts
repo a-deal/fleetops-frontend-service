@@ -66,6 +66,13 @@ const nextConfig: NextConfig = {
   // Strict mode for better React development
   reactStrictMode: true,
   
+  // Transpile workspace packages
+  transpilePackages: [
+    '@repo/ui',
+    '@repo/telemetry',
+    '@repo/theme'
+  ],
+  
   // Fix infinite recompilation in PWA dev mode by ignoring generated service worker
   webpack: (config, { isServer, dev }) => {
     if (dev && !isServer && isPWAEnabled) {

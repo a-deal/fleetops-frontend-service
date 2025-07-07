@@ -10,21 +10,14 @@ describePerf('CircularBuffer performance', () => {
 
   test('push operation stays under 1μs', () => {
     const buffer = new CircularBuffer(1000);
-    const iterations = 10000;
+    let i = 0;
     
-    // Warmup
-    for (let i = 0; i < 100; i++) {
-      buffer.push(i);
-    }
+    const result = monitor.measure('CircularBuffer.push', () => {
+      buffer.push(i++);
+    });
     
-    const start = performance.now();
-    for (let i = 0; i < iterations; i++) {
-      buffer.push(i);
-    }
-    const duration = performance.now() - start;
-    const avgTimePerOp = duration / iterations;
-    
-    expect(avgTimePerOp).toBeLessThan(0.001); // 1μs
+    expect(result.average).toBeLessThan(0.001); // 1μs
+    expect(result.pass).toBe(true);
   });
 
   test('getAll performance scales linearly with capacity', () => {
@@ -58,9 +51,11 @@ describePerf('CircularBuffer performance', () => {
     const ratio100x = results[2].time / results[0].time;
     
     // Log scaling characteristics for monitoring
+    /* eslint-disable no-console */
     console.log('\ngetAll() Scaling Characteristics:');
     console.log(`  100 -> 1000 (10x): ${ratio10x.toFixed(2)}x time`);
     console.log(`  100 -> 10000 (100x): ${ratio100x.toFixed(2)}x time\n`);
+    /* eslint-enable no-console */
     
     // Very relaxed expectations - just ensure it's not O(1) or catastrophic
     expect(ratio10x).toBeGreaterThan(1);    // At least some scaling
@@ -167,6 +162,7 @@ describePerf('CircularBuffer performance', () => {
     });
     
     // Log performance characteristics for monitoring
+    /* eslint-disable no-console */
     console.log('\ngetLast() Performance Characteristics:');
     measurements.forEach(({ fillLevel, avgTime }) => {
       console.log(`  Fill ${(fillLevel * 100).toFixed(0)}%: ${avgTime.toFixed(4)}ms`);
@@ -179,6 +175,7 @@ describePerf('CircularBuffer performance', () => {
     const variance = max / min;
     
     console.log(`  Variance: ${variance.toFixed(2)}x (min: ${min.toFixed(4)}ms, max: ${max.toFixed(4)}ms)\n`);
+    /* eslint-enable no-console */
     
     // Only fail on catastrophic performance regression (>20x variance)
     // This indicates a real problem, not just CPU cache effects
@@ -220,11 +217,16 @@ describePerf('CircularBuffer performance', () => {
 
   test('performance under memory pressure', () => {
     // Create multiple buffers to simulate memory pressure
-    const buffers: CircularBuffer<any>[] = [];
+    interface TestItem {
+      id: number;
+      data: string;
+    }
+    
+    const buffers: CircularBuffer<TestItem>[] = [];
     
     // Create 100 buffers with 1000 items each
     for (let i = 0; i < 100; i++) {
-      const buffer = new CircularBuffer<any>(1000);
+      const buffer = new CircularBuffer<TestItem>(1000);
       for (let j = 0; j < 1000; j++) {
         buffer.push({ id: j, data: `item-${j}` });
       }

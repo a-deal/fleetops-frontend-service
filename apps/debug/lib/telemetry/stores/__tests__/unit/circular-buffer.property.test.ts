@@ -139,7 +139,7 @@ describe('CircularBuffer properties', () => {
           objects.forEach(obj => buffer.push(obj));
           
           const retrieved = buffer.getAll();
-          retrieved.forEach((item, index) => {
+          retrieved.forEach((item) => {
             const originalIndex = objects.indexOf(item);
             expect(item).toBe(objects[originalIndex]); // Same reference
             expect(item).toEqual(original[originalIndex]); // Same content

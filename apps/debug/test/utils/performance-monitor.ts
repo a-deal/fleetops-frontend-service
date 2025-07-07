@@ -78,7 +78,7 @@ export class PerformanceMonitor {
   private percentile(arr: number[], p: number): number {
     const sorted = [...arr].sort((a, b) => a - b);
     const index = Math.ceil((p / 100) * sorted.length) - 1;
-    return sorted[index];
+    return sorted[index] ?? 0;
   }
 
   generateReport(): void {
@@ -106,5 +106,5 @@ export function average(arr: number[]): number {
 export function percentile(arr: number[], p: number): number {
   const sorted = [...arr].sort((a, b) => a - b);
   const index = Math.ceil((p / 100) * sorted.length) - 1;
-  return sorted[index];
+  return sorted[index] ?? 0;
 }

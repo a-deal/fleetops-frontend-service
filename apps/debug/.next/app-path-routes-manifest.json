@@ -1,0 +1,12 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/hello/page": "/hello",
+  "/page": "/",
+  "/offline/page": "/offline",
+  "/test/page": "/test",
+  "/test-tokens/page": "/test-tokens",
+  "/theme-test/page": "/theme-test",
+  "/pwa-test/page": "/pwa-test",
+  "/showcase/page": "/showcase"
+}

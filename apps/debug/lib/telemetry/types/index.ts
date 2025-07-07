@@ -98,31 +98,45 @@ export type SensorPriority = 'critical' | 'standard' | 'auxiliary';
 /**
  * Type guard to check if an object is a valid TelemetryReading
  */
-export function isTelemetryReading(obj: any): obj is TelemetryReading {
+export function isTelemetryReading(obj: unknown): obj is TelemetryReading {
   return (
     typeof obj === 'object' &&
-    typeof obj.equipmentId === 'string' &&
-    typeof obj.sensorType === 'string' &&
-    typeof obj.value === 'number' &&
-    typeof obj.unit === 'string' &&
-    typeof obj.timestamp === 'number' &&
-    obj.timestamp > 0
+    obj !== null &&
+    'equipmentId' in obj &&
+    'sensorType' in obj &&
+    'value' in obj &&
+    'unit' in obj &&
+    'timestamp' in obj &&
+    typeof (obj as TelemetryReading).equipmentId === 'string' &&
+    typeof (obj as TelemetryReading).sensorType === 'string' &&
+    typeof (obj as TelemetryReading).value === 'number' &&
+    typeof (obj as TelemetryReading).unit === 'string' &&
+    typeof (obj as TelemetryReading).timestamp === 'number' &&
+    (obj as TelemetryReading).timestamp > 0
   );
 }
 
 /**
  * Type guard to check if an object is a valid TelemetryAggregate
  */
-export function isTelemetryAggregate(obj: any): obj is TelemetryAggregate {
+export function isTelemetryAggregate(obj: unknown): obj is TelemetryAggregate {
   return (
     typeof obj === 'object' &&
-    typeof obj.equipmentId === 'string' &&
-    typeof obj.sensorType === 'string' &&
-    typeof obj.timestamp === 'number' &&
-    typeof obj.min === 'number' &&
-    typeof obj.max === 'number' &&
-    typeof obj.avg === 'number' &&
-    typeof obj.count === 'number' &&
-    obj.count > 0
+    obj !== null &&
+    'equipmentId' in obj &&
+    'sensorType' in obj &&
+    'timestamp' in obj &&
+    'min' in obj &&
+    'max' in obj &&
+    'avg' in obj &&
+    'count' in obj &&
+    typeof (obj as TelemetryAggregate).equipmentId === 'string' &&
+    typeof (obj as TelemetryAggregate).sensorType === 'string' &&
+    typeof (obj as TelemetryAggregate).timestamp === 'number' &&
+    typeof (obj as TelemetryAggregate).min === 'number' &&
+    typeof (obj as TelemetryAggregate).max === 'number' &&
+    typeof (obj as TelemetryAggregate).avg === 'number' &&
+    typeof (obj as TelemetryAggregate).count === 'number' &&
+    (obj as TelemetryAggregate).count > 0
   );
 }
