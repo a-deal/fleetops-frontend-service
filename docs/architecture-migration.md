@@ -802,3 +802,49 @@ on:
 ```
 
 This allows independent deployment pipelines while sharing code.
+
+### Jest Configuration for Monorepo
+
+#### Issue: Jest Tests Failing with TypeScript Syntax Errors
+When running tests from the monorepo root, Jest was failing with syntax errors because it couldn't find the `tsconfig.test.json` file referenced in `apps/debug/jest.config.js`.
+
+#### Solution: Root Jest Configuration with Projects
+Created a root `jest.config.js` that uses the projects pattern, following monorepo best practices:
+
+```javascript
+// jest.config.js (root)
+module.exports = {
+  // Automatically discover projects with jest.config.js files
+  projects: [
+    '<rootDir>/apps/*/jest.config.js',
+    '<rootDir>/packages/*/jest.config.js',
+  ],
+  
+  // Global settings that apply to all projects unless overridden
+  coverageDirectory: '<rootDir>/coverage',
+  collectCoverageFrom: [
+    '**/*.{ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+    '!**/.next/**',
+    '!**/dist/**',
+    '!**/coverage/**',
+  ],
+};
+```
+
+Also updated `apps/debug/jest.config.js` to use absolute paths:
+```javascript
+transform: {
+  '^.+\\.tsx?$': ['ts-jest', {
+    tsconfig: '<rootDir>/tsconfig.test.json'  // Now uses absolute path
+  }]
+}
+```
+
+This configuration:
+- Automatically discovers test projects using glob patterns
+- Allows running all tests with `pnpm test` from root
+- Enables per-app test execution with `pnpm --filter @apps/debug test`
+- Centralizes coverage reporting
+- Scales automatically as new apps/packages are added
