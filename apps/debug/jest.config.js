@@ -12,7 +12,7 @@ module.exports = {
       },
       transform: {
         '^.+\\.tsx?$': ['ts-jest', {
-          tsconfig: 'tsconfig.test.json'
+          tsconfig: '<rootDir>/tsconfig.test.json'
         }]
       }
     },
@@ -26,7 +26,7 @@ module.exports = {
       },
       transform: {
         '^.+\\.tsx?$': ['ts-jest', {
-          tsconfig: 'tsconfig.test.json',
+          tsconfig: '<rootDir>/tsconfig.test.json',
           isolatedModules: true // Faster for perf tests
         }]
       }
