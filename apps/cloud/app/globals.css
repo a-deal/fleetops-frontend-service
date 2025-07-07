@@ -1,0 +1,357 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Configure Tailwind to scan workspace packages */
+@source "../../../packages/*/src/**/*.{js,ts,jsx,tsx,mdx}";
+@source "../**/*.{js,ts,jsx,tsx,mdx}";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Design Token Integration */
+  
+  /* Font Families - Removed as Next.js handles fonts via classes */
+  
+  /* Color Mapping */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
+  /* Functional Colors */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-error-foreground: var(--error-foreground);
+  
+  /* Chart Colors */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  
+  /* Sidebar Colors */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Fleet Status Colors */
+  --color-fleet-status-operational: var(--fleet-status-operational);
+  --color-fleet-status-warning: var(--fleet-status-warning);
+  --color-fleet-status-critical: var(--fleet-status-critical);
+  --color-fleet-status-offline: var(--fleet-status-offline);
+  
+  /* Fleet Equipment States */
+  --color-fleet-equipment-active: var(--fleet-equipment-active);
+  --color-fleet-equipment-idle: var(--fleet-equipment-idle);
+  --color-fleet-equipment-maintenance: var(--fleet-equipment-maintenance);
+  --color-fleet-equipment-fault: var(--fleet-equipment-fault);
+  
+  /* Fleet Alert Severity */
+  --color-fleet-alert-info: var(--fleet-alert-info);
+  --color-fleet-alert-warning: var(--fleet-alert-warning);
+  --color-fleet-alert-error: var(--fleet-alert-error);
+  --color-fleet-alert-critical: var(--fleet-alert-critical);
+  
+  /* Fleet Telemetry Colors */
+  --color-fleet-telemetry-pressure: var(--fleet-telemetry-pressure);
+  --color-fleet-telemetry-temperature: var(--fleet-telemetry-temperature);
+  --color-fleet-telemetry-flow: var(--fleet-telemetry-flow);
+  --color-fleet-telemetry-vibration: var(--fleet-telemetry-vibration);
+  
+  /* Border Radius from tokens */
+  --radius-sm: 0.125rem;
+  --radius-DEFAULT: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+}
+
+:root {
+  /* Design Tokens - Light Theme */
+  --radius: 0.25rem;
+  
+  /* Core Colors from tokens */
+  --background: oklch(100% 0 0);
+  --foreground: oklch(20.37% 0.024 253.13);
+  --muted: oklch(97.51% 0.008 253.13);
+  --muted-foreground: oklch(55.43% 0.046 257.42);
+  
+  /* Brand Colors */
+  --primary: oklch(63.31% 0.177 264.38);
+  --primary-foreground: oklch(100% 0 0);
+  
+  /* Secondary */
+  --secondary: oklch(97.51% 0.008 253.13);
+  --secondary-foreground: oklch(20.37% 0.024 253.13);
+  
+  /* Accent */
+  --accent: oklch(97.51% 0.008 253.13);
+  --accent-foreground: oklch(20.37% 0.024 253.13);
+  
+  /* Functional Colors */
+  --success: oklch(60.14% 0.145 162.48);
+  --success-foreground: oklch(100% 0 0);
+  --warning: oklch(79.48% 0.154 86.05);
+  --warning-foreground: oklch(20.37% 0.024 253.13);
+  --error: oklch(63.31% 0.220 27.32);
+  --error-foreground: oklch(100% 0 0);
+  --destructive: oklch(63.31% 0.220 27.32);
+  --destructive-foreground: oklch(100% 0 0);
+  
+  /* UI Elements */
+  --border: oklch(93.60% 0.009 253.13);
+  --input: oklch(93.60% 0.009 253.13);
+  --ring: oklch(63.31% 0.177 264.38);
+  
+  /* Card */
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(20.37% 0.024 253.13);
+  
+  /* Popover */
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(20.37% 0.024 253.13);
+  
+  /* Chart Colors */
+  --chart-1: oklch(63.31% 0.177 264.38);
+  --chart-2: oklch(60.14% 0.145 162.48);
+  --chart-3: oklch(79.48% 0.154 86.05);
+  --chart-4: oklch(73.51% 0.172 254.62);
+  --chart-5: oklch(54.98% 0.196 268.02);
+  
+  /* Sidebar */
+  --sidebar: oklch(100% 0 0);
+  --sidebar-foreground: oklch(20.37% 0.024 253.13);
+  --sidebar-primary: oklch(63.31% 0.177 264.38);
+  --sidebar-primary-foreground: oklch(100% 0 0);
+  --sidebar-accent: oklch(97.51% 0.008 253.13);
+  --sidebar-accent-foreground: oklch(20.37% 0.024 253.13);
+  --sidebar-border: oklch(93.60% 0.009 253.13);
+  --sidebar-ring: oklch(63.31% 0.177 264.38);
+  
+  /* Fleet Status Colors - Light Mode */
+  --fleet-status-operational: 142.1 70.6% 45.3%; /* Green */
+  --fleet-status-warning: 45.4 92.9% 47.4%; /* Amber */
+  --fleet-status-critical: 0 72.2% 50.6%; /* Red */
+  --fleet-status-offline: 0 0% 63.9%; /* Gray */
+  
+  /* Fleet Equipment States - Light Mode */
+  --fleet-equipment-active: 142.1 70.6% 45.3%; /* Green */
+  --fleet-equipment-idle: 201.3 96.3% 32.2%; /* Blue */
+  --fleet-equipment-maintenance: 45.4 92.9% 47.4%; /* Amber */
+  --fleet-equipment-fault: 0 72.2% 50.6%; /* Red */
+  
+  /* Fleet Alert Severity - Light Mode */
+  --fleet-alert-info: 201.3 96.3% 32.2%; /* Blue */
+  --fleet-alert-warning: 45.4 92.9% 47.4%; /* Amber */
+  --fleet-alert-error: 24.6 94.7% 53.1%; /* Orange */
+  --fleet-alert-critical: 0 72.2% 50.6%; /* Red */
+  
+  /* Fleet Telemetry Colors - Light Mode */
+  --fleet-telemetry-pressure: 201.3 96.3% 32.2%; /* Blue */
+  --fleet-telemetry-temperature: 0 72.2% 50.6%; /* Red */
+  --fleet-telemetry-flow: 142.1 70.6% 45.3%; /* Green */
+  --fleet-telemetry-vibration: 280.1 87.0% 50.3%; /* Purple */
+}
+
+.dark {
+  /* Design Tokens - Dark Theme */
+  
+  /* Core Colors from tokens */
+  --background: oklch(20.37% 0.024 253.13);
+  --foreground: oklch(98.74% 0.008 253.13);
+  --muted: oklch(31.42% 0.042 264.70);
+  --muted-foreground: oklch(70.64% 0.027 257.42);
+  
+  /* Brand Colors */
+  --primary: oklch(63.31% 0.177 264.38);
+  --primary-foreground: oklch(20.37% 0.024 253.13);
+  
+  /* Secondary */
+  --secondary: oklch(31.42% 0.042 264.70);
+  --secondary-foreground: oklch(98.74% 0.008 253.13);
+  
+  /* Accent */
+  --accent: oklch(31.42% 0.042 264.70);
+  --accent-foreground: oklch(98.74% 0.008 253.13);
+  
+  /* Functional Colors */
+  --success: oklch(60.14% 0.145 162.48);
+  --success-foreground: oklch(98.74% 0.008 253.13);
+  --warning: oklch(79.48% 0.154 86.05);
+  --warning-foreground: oklch(20.37% 0.024 253.13);
+  --error: oklch(63.31% 0.220 27.32);
+  --error-foreground: oklch(98.74% 0.008 253.13);
+  --destructive: oklch(63.31% 0.220 27.32);
+  --destructive-foreground: oklch(98.74% 0.008 253.13);
+  
+  /* UI Elements */
+  --border: oklch(31.42% 0.042 264.70);
+  --input: oklch(31.42% 0.042 264.70);
+  --ring: oklch(63.31% 0.177 264.38);
+  
+  /* Card */
+  --card: oklch(26.46% 0.042 264.70);
+  --card-foreground: oklch(98.74% 0.008 253.13);
+  
+  /* Popover */
+  --popover: oklch(26.46% 0.042 264.70);
+  --popover-foreground: oklch(98.74% 0.008 253.13);
+  
+  /* Chart Colors */
+  --chart-1: oklch(63.31% 0.177 264.38);
+  --chart-2: oklch(60.14% 0.145 162.48);
+  --chart-3: oklch(79.48% 0.154 86.05);
+  --chart-4: oklch(73.51% 0.172 254.62);
+  --chart-5: oklch(54.98% 0.196 268.02);
+  
+  /* Sidebar */
+  --sidebar: oklch(26.46% 0.042 264.70);
+  --sidebar-foreground: oklch(98.74% 0.008 253.13);
+  --sidebar-primary: oklch(63.31% 0.177 264.38);
+  --sidebar-primary-foreground: oklch(98.74% 0.008 253.13);
+  --sidebar-accent: oklch(31.42% 0.042 264.70);
+  --sidebar-accent-foreground: oklch(98.74% 0.008 253.13);
+  --sidebar-border: oklch(31.42% 0.042 264.70);
+  --sidebar-ring: oklch(63.31% 0.177 264.38);
+  
+  /* Fleet Status Colors - Dark Mode */
+  --fleet-status-operational: 142.1 70.6% 55.3%; /* Brighter green for dark mode */
+  --fleet-status-warning: 45.4 92.9% 57.4%; /* Brighter amber for dark mode */
+  --fleet-status-critical: 0 72.2% 60.6%; /* Brighter red for dark mode */
+  --fleet-status-offline: 0 0% 73.9%; /* Brighter gray for dark mode */
+  
+  /* Fleet Equipment States - Dark Mode */
+  --fleet-equipment-active: 142.1 70.6% 55.3%; /* Brighter green */
+  --fleet-equipment-idle: 201.3 96.3% 42.2%; /* Brighter blue */
+  --fleet-equipment-maintenance: 45.4 92.9% 57.4%; /* Brighter amber */
+  --fleet-equipment-fault: 0 72.2% 60.6%; /* Brighter red */
+  
+  /* Fleet Alert Severity - Dark Mode */
+  --fleet-alert-info: 201.3 96.3% 42.2%; /* Brighter blue */
+  --fleet-alert-warning: 45.4 92.9% 57.4%; /* Brighter amber */
+  --fleet-alert-error: 24.6 94.7% 63.1%; /* Brighter orange */
+  --fleet-alert-critical: 0 72.2% 60.6%; /* Brighter red */
+  
+  /* Fleet Telemetry Colors - Dark Mode */
+  --fleet-telemetry-pressure: 201.3 96.3% 42.2%; /* Brighter blue */
+  --fleet-telemetry-temperature: 0 72.2% 60.6%; /* Brighter red */
+  --fleet-telemetry-flow: 142.1 70.6% 55.3%; /* Brighter green */
+  --fleet-telemetry-vibration: 280.1 87.0% 60.3%; /* Brighter purple */
+}
+
+@layer utilities {
+  /* Note: font-heading class will be handled by Next.js font system */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* ========================================================================== */
+  /* Tremor CSS Variable Mapping - Maps to shadcn/ui variables                 */
+  /* This enables Tremor components to use our unified theme                    */
+  /* ========================================================================== */
+  :root {
+    /* Text and Icon Colors → Foreground */
+    --tremor-content-emphasis: oklch(from var(--foreground) l c h);
+    --tremor-content-strong: oklch(from var(--foreground) l c h / 0.9);
+    --tremor-content-DEFAULT: oklch(from var(--foreground) l c h / 0.75);
+    --tremor-content-subtle: oklch(from var(--foreground) l c h / 0.5);
+    
+    /* Surface and Background Colors → Background & Card */
+    --tremor-background-muted: oklch(from var(--muted) l c h);
+    --tremor-background-subtle: oklch(from var(--accent) l c h);
+    --tremor-background-DEFAULT: oklch(from var(--background) l c h);
+    --tremor-background-emphasis: oklch(from var(--card) l c h);
+
+    /* Border Colors → Border */
+    --tremor-border-DEFAULT: oklch(from var(--border) l c h);
+    --tremor-border-strong: oklch(from var(--foreground) l c h / 0.2);
+
+    /* Ring (Focus) Colors → Ring */
+    --tremor-ring-DEFAULT: oklch(from var(--ring) l c h);
+
+    /* Brand Colors → Primary */
+    --tremor-brand-faint: oklch(from var(--primary) l c h / 0.1);
+    --tremor-brand-muted: oklch(from var(--primary) l c h / 0.2);
+    --tremor-brand-subtle: oklch(from var(--primary) l c h / 0.3);
+    --tremor-brand-DEFAULT: oklch(from var(--primary) l c h);
+    --tremor-brand-emphasis: oklch(from var(--primary-foreground) l c h);
+    --tremor-brand-inverted: oklch(from var(--background) l c h);
+
+    /* Radius → Use existing radius vars */
+    --tremor-border-radius-small: calc(var(--radius) - 0.2rem);
+    --tremor-border-radius-DEFAULT: var(--radius);
+    --tremor-border-radius-large: calc(var(--radius) + 0.2rem);
+    
+    /* Shadows - Tremor specific */
+    --tremor-shadow-card: 0 1px 3px 0 oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
+    --tremor-shadow-dropdown: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  }
+
+  /* Apply Tremor overrides to ensure consistency */
+  [data-tremor-root] {
+    --tremor-brand: var(--primary);
+    --tremor-background-default: var(--background);
+    --tremor-text-default: var(--foreground);
+  }
+}
+
+/* High-Contrast Mode for Field Conditions */
+.high-contrast {
+  /* Enhanced contrast for outdoor/industrial use */
+  --background: oklch(0% 0 0);
+  --foreground: oklch(100% 0 0);
+  --muted: oklch(20% 0 0);
+  --muted-foreground: oklch(80% 0 0);
+  
+  /* High contrast status colors */
+  --fleet-status-operational: 120 100% 50%; /* Pure green */
+  --fleet-status-warning: 60 100% 50%; /* Pure yellow */
+  --fleet-status-critical: 0 100% 50%; /* Pure red */
+  --fleet-status-offline: 0 0% 80%; /* High contrast gray */
+  
+  /* High contrast equipment states */
+  --fleet-equipment-active: 120 100% 50%;
+  --fleet-equipment-idle: 240 100% 50%;
+  --fleet-equipment-maintenance: 60 100% 50%;
+  --fleet-equipment-fault: 0 100% 50%;
+  
+  /* Enhanced borders and inputs for visibility */
+  --border: oklch(50% 0 0);
+  --input: oklch(15% 0 0);
+  --card: oklch(5% 0 0);
+  --card-foreground: oklch(100% 0 0);
+}
