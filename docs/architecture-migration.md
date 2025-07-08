@@ -973,11 +973,11 @@ interface TelemetryReading {
 
 ### Decision Status
 
-**Date**: 2025-07-07  
-**Status**: PENDING - Active evaluation of authentication solutions  
-**Leading Option**: Self-hosted Keycloak based on consensus analysis  
-**Alternative Options**: AWS Cognito, SuperTokens, Custom Build  
-**Expected Decision Date**: TBD after further evaluation  
+**Date**: 2025-07-08  
+**Status**: PENDING - PoC validation phase starting  
+**Leading Option**: Self-hosted Keycloak (unanimous consensus from 5 models)  
+**Alternative Options**: AWS Cognito (fallback), SuperTokens (insufficient for our RBAC)  
+**Expected Decision Date**: End of Week 4 after PoC validation  
 
 ### Research Context
 
@@ -1163,5 +1163,153 @@ Remarkably, **no model disagreed** on the core recommendation. The only variatio
 **Open Questions**:
 - Team readiness for managing self-hosted infrastructure
 - Total cost of ownership including operational overhead
+
+## Monorepo Architecture Decision (2025-07-08)
+
+### Consensus Analysis Results
+
+**Models Consulted**: O4-mini, Gemini-2.5-pro, DeepSeek-r1, Opus 4, Qwen-max
+
+**Decision**: Hybrid Repository Architecture
+
+### Final Architecture
+
+```
+✅ MONOREPO: Frontend + Backend Services
+   - apps/cloud (production cloud service)
+   - apps/debug (edge debug tool)  
+   - apps/backend (Lambda/API services)
+   - packages/shared (common libraries)
+
+❌ SEPARATE REPOS: Embedded + Infrastructure
+   - fleetops-embedded (device firmware)
+   - fleetops-infrastructure (Terraform)
+```
+
+### Rationale from Consensus
+
+**Strong Agreement**:
+- Embedded code MUST remain separate (security, toolchain)
+- Frontend/backend benefit from atomic commits
+- Infrastructure needs isolated state management
+
+**Key Concerns Addressed**:
+1. **Security Boundaries**: Firmware requires strict access control
+2. **Toolchain Conflicts**: C/C++/Rust vs JS/TS ecosystems
+3. **Release Cadence**: Devices update quarterly, cloud daily
+4. **Build Performance**: Avoid cross-compilation in JS pipeline
+
+### Implementation Requirements
+
+**Day 1 Necessities**:
+1. **CODEOWNERS** file with strict boundaries
+2. **Path-based CI triggers** (e.g., `apps/cloud/**` → cloud pipeline only)
+3. **Git submodules** for cross-repo dependencies
+4. **Turborepo/Nx** for monorepo orchestration
+
+**Example CI Configuration**:
+```yaml
+# .github/workflows/ci.yml
+on:
+  push:
+    paths:
+      - 'apps/cloud/**'
+      - 'packages/**'
+      
+jobs:
+  cloud:
+    if: contains(github.event.paths, 'apps/cloud')
+    # Cloud-specific build/test/deploy
+```
+
+### Migration Timeline
+
+**Week 1**: Setup monorepo structure
+- Move backend services to `apps/backend`
+- Configure Turborepo/Nx
+- Implement path-based CI
+
+**Week 2**: Establish boundaries  
+- Create separate repos for embedded/infra
+- Setup git submodules
+- Document access policies
+
+**Week 3**: Validate workflows
+- Test atomic commits across frontend/backend
+- Verify CI performance
+- Team training on new structure
+
+## Keycloak PoC Infrastructure Design (2025-07-08)
+
+### Consensus Recommendation
+
+**All 5 models agreed**: Keycloak is technically viable and cost-effective
+- Projected savings: ~$60,000/year vs AWS Cognito
+- Unanimous support for self-hosted approach
+
+### PoC Infrastructure Design
+
+**Start Simple**: ECS Fargate (not EKS) for PoC
+- Simpler operations for validation phase
+- Faster iteration on authentication patterns
+- Lower cost (~$320/month vs $500+ for EKS)
+
+**Terraform Module Structure**:
+```hcl
+# Minimal PoC modules
+modules/
+├── network/     # VPC, subnets, security groups
+├── database/    # RDS PostgreSQL (t3.small, no Multi-AZ)
+├── keycloak/    # ECS Fargate tasks (2x 2vCPU/4GB)
+└── iot_auth/    # Lambda authorizer for IoT Core
+```
+
+### Critical Validation Points
+
+1. **IoT Device Authentication Flow**
+   - Custom Lambda authorizer for AWS IoT Core
+   - JWT token exchange mechanism
+   - Target: <500ms authentication latency
+
+2. **Operator RBAC Testing**
+   - 200 concurrent user logins
+   - Role hierarchy: Admin→Manager→Operator→Driver
+   - Permission inheritance validation
+
+3. **Scale Testing**
+   - Simulate 1M+ device authentications/month
+   - Monitor PostgreSQL connection pooling
+   - Validate auto-scaling behavior
+
+### Risk Mitigation
+
+**High Priority Risks**:
+1. **IoT Core Integration**: No native Keycloak support
+   - Mitigation: Custom Java SPI development budgeted
+   - Fallback: Keep AWS Cognito for devices only
+
+2. **Operational Expertise**: Java/Keycloak knowledge gap
+   - Mitigation: $60k savings funds dedicated engineer
+   - Fallback: Managed Keycloak services available
+
+3. **PostgreSQL Connection Limits**: IoT devices may exhaust connections
+   - Mitigation: Connection pooling + monitoring
+   - Fallback: Redis session cache layer
+
+### PoC Success Criteria
+
+✅ Device auth latency <500ms at 95th percentile
+✅ 200 concurrent operators with <1s login time
+✅ Cost projection <$1000/month at production scale
+✅ Successful failover test (RDS AZ failure)
+✅ Terraform deployment in <30 minutes
+
+### Go/No-Go Decision Framework
+
+**Week 4 Decision Points**:
+1. If IoT integration requires >2 weeks custom dev → **Reconsider**
+2. If operational overhead >20% of DevOps time → **Reconsider**
+3. If total costs exceed Cognito savings by 50% → **No-Go**
+4. If all success criteria met → **Proceed to production**
 - Integration complexity with existing AWS services
 - Compliance and security certification requirements
